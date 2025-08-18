@@ -1,0 +1,15 @@
+<h1>Entrar</h1>
+<div class="login-container container">
+    <form action="#" [formGroup]="form">
+      <input type="text" placeholder="E-mail" formControlName="email">
+      <input type="password" placeholder="Senha" formControlName="password">
+      <button type="submit" id="login" (click)="onSubmit()"> Entrar </button>
+      <div class="divisor"><hr>ou<hr></div>
+      <button class="option" id="google" (click)="onGoogleLogin()"> <img src="/assets/images/google-icon.png" alt="Google Icon"> Google </button>
+      <button class="option" id="github" (click)="onGitHubLogin()"> <img src="/assets/images/github-icon.png" alt="GitHub Icon"> GitHub </button>
+    </form>
+    <p><a (click)="resetForm()" [routerLink]="['/forgot-password']"> Esqueceu a senha? </a></p>
+</div>  
+<div class="register-container container">
+  <p>Não tem uma conta? <a [routerLink]="['/register']"> Cadastre-se </a></p>
+</div>
