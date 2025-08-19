@@ -1,3 +1,5 @@
+$border-radius-container: 8px;
+
 h1{
     display: flex;
     justify-content: center;
@@ -16,7 +18,12 @@ h1{
     background-color: white;
     color: black;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: $border-radius-container;
+    transition: 0.3s;
+}
+
+.login-container:hover{
+    padding: 36px;
 }
 
 .register-container{
@@ -27,7 +34,7 @@ h1{
     background-color: white;
     color: black;
     padding: 15px 30px;
-    border-radius: 10px;
+    border-radius: $border-radius-container;
 }
 
 .login-container form {
@@ -57,10 +64,20 @@ input{
     background-color: black;
 }
 
+input:focus{
+    border: 3px solid rgb(255, 183, 0);
+    outline: none;
+}
+
+input:hover{
+    background-color: rgb(33, 33, 33);
+}
+
 input::content,
 input::placeholder{
     color: white;
 }
+
 button {
     display: flex;
     align-items: center;

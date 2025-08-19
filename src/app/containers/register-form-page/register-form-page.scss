@@ -12,8 +12,14 @@ h1{
     background-color: white;
     color: black;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
 }
+
+.register-container:hover{
+    padding: 36px;
+}
+
 
 .register-container form {
     display: flex;
@@ -37,6 +43,15 @@ button, input {
 input{
     background-color: black;
     margin: 10px 10px;
+}
+
+input:focus{
+    border: 3px solid rgb(255, 183, 0);
+    outline: none;
+}
+
+input:hover{
+    background-color: rgb(33, 33, 33);
 }
 
 input::content,

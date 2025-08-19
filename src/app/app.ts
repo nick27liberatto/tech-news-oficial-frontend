@@ -1,4 +1,4 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,11 +7,23 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('auth-system');
+export class App implements AfterViewInit{
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
   isPaused:boolean = false;
   iconPath:string = '/assets/images/pause-icon.png';
+
+   ngAfterViewInit(): void {
+    const video = this.bgVideo.nativeElement;
+
+    video.muted = true; 
+
+    video.play().then(() => {
+      this.isPaused = false;
+    }).catch((err) => {
+      console.warn("Autoplay bloqueado pelo navegador:", err);
+      this.isPaused = true;
+    });
+  }
 
   pauseVideo(){
     const video = this.bgVideo.nativeElement;

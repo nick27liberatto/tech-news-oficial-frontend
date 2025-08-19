@@ -16,4 +16,10 @@
     position: fixed;
     top: 20px;
     left: 20px;
+    transition: 0.2s;
+}
+
+.pause-icon:hover{
+  height: 24px;
+  width: 24px;
 }
