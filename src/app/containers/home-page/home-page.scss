@@ -1,16 +1,10 @@
-$border-radius-container: 8px;
-
 h1{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container{
-    margin: 10px auto;
-}
-
-.list-container {
+.home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,37 +12,27 @@ h1{
     background-color: white;
     color: black;
     padding: 30px;
-    border-radius: $border-radius-container;
+    border-radius: 8px;
+    width: 400px;
     transition: 0.3s;
 }
 
-.list-container:hover{
+.home-container:hover{
     padding: 36px;
 }
 
-.register-container{
+.info {
+    font-size: 14px;
+    text-align: center;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    margin-bottom: 12px;
+}
+
+.home-container form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    color: black;
-    padding: 15px 30px;
-    border-radius: $border-radius-container;
-}
-
-.list-container form {
-    display: flex;
-    flex-direction: column;
-}
-
-.divisor {
-    display: flex;
-}
-
-.divisor hr {
-    width: 100%;
-    margin: auto 10px;
 }
 
 button, input {
@@ -60,8 +44,15 @@ button, input {
     border: none;
 }
 
+.row{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 input{
     background-color: black;
+    margin: 10px 10px;
+    padding: 15px;
 }
 
 input:focus{
@@ -85,6 +76,32 @@ button {
     cursor: pointer;
 }
 
+#home{
+    background-color: rgb(255, 183, 0);;
+    color: white;
+}
+
+#home:hover{
+    background-color: rgb(206, 148, 0);
+}
+
+.back-button{   
+    background-color: rgb(217, 217, 217);
+}
+
+.back-button:hover{
+    background-color: rgb(198, 198, 198);
+}
+
+.divisor {
+    display: flex;
+}
+
+.divisor hr {
+    width: 100%;
+    margin: auto 10px;
+}
+
 .option{
     padding: 6px;
     background-color: rgb(224, 224, 224);
@@ -94,12 +111,12 @@ button {
     background-color: rgb(207, 207, 207);
 }
 
-#list{
+#login{
     background-color: rgb(255, 183, 0);
     color: white;
 }
 
-#list:hover{
+#login:hover{
     background-color: rgb(206, 148, 0);
 }
 
@@ -116,12 +133,3 @@ p{
 a{
     color: rgb(255, 183, 0);
 }
-
-a:hover{
-    color: rgb(206, 148, 0);
-}
-
-a:visited {
-    color: rgb(206, 103, 0);
-}
-

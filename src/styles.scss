@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 * {
     font-family: "Roboto Mono", monospace;
     overflow: hidden;
+    transition: all 0.1s ease-in-out;
 }
 
 body {
@@ -12,4 +12,18 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+input.ng-invalid.ng-touched {
+  border: 2px solid #d93025; 
+  box-shadow: 0 0 0 1px #d93025, 0 0 0 4px rgba(217, 48, 37, 0.2);
+  outline: none; 
+}
+
+input.ng-invalid.ng-touched::placeholder {
+  color: #d93025;
+  opacity: 0.8;
 }

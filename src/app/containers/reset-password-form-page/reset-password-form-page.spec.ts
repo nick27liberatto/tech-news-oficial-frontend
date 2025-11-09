@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListUsersPage } from './list-users-page';
+import { ResetPasswordFormPage } from './reset-password-form-page';
 
-describe('ListUsersPage', () => {
-  let component: ListUsersPage;
-  let fixture: ComponentFixture<ListUsersPage>;
+describe('ResetPasswordFormPage', () => {
+  let component: ResetPasswordFormPage;
+  let fixture: ComponentFixture<ResetPasswordFormPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListUsersPage]
+      imports: [ResetPasswordFormPage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListUsersPage);
+    fixture = TestBed.createComponent(ResetPasswordFormPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

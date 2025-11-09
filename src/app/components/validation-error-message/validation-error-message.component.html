@@ -1,0 +1,14 @@
+@if (control.invalid && (control.dirty || control.touched)) {
+<div class="error-container">
+    <div class="error-content">
+        @for (error of (controlErrors | keyvalue); track error.key) {
+        @if (error.value) {
+        <div class="error-wrapper">
+            <span class="error-icon">&#x26A0;</span>
+            <p class="error-text">{{formValidationErrors[error.key]}}</p>
+        </div>
+        }
+        }
+    </div>
+</div>
+}
