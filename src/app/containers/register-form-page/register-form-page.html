@@ -2,13 +2,17 @@
 <div class="register-container">
     <form action="#" [formGroup]="form">
         <input type="text" placeholder="Nome Completo" formControlName="fullName">
+        <app-error-message [control]="fullName"></app-error-message>
         <input type="text" placeholder="E-mail" formControlName="email">
+        <app-error-message [control]="email"></app-error-message>
         <input type="password" placeholder="Senha" formControlName="password">
-        <input type="password" placeholder="Confirmar Senha" formControlName="password">
+        <app-error-message [control]="password"></app-error-message>
+        <input type="password" placeholder="Confirmar Senha" formControlName="confirmPassword">
+        <app-error-message [control]="confirmPassword"></app-error-message>
         <button type="submit" id="register" (click)="onSubmit()"> Criar Conta </button>
         <button class="back-button" (click)="resetForm()" [routerLink]="['/login']"> Voltar </button>
         <div class="divisor"><hr>ou<hr></div>
         <button class="option" id="google" (click)="onGoogleLogin()"> <img src="/assets/images/google-icon.png" alt="Google Icon"> Google </button>
-        <button class="option" id="github" (click)="onGitHubLogin()"> <img src="/assets/images/github-icon.png" alt="GitHub Icon"> GitHub </button>
+        <button class="option" id="github" (click)="onGithubLogin()"> <img src="/assets/images/github-icon.png" alt="GitHub Icon"> GitHub </button>
     </form>
 </div>  

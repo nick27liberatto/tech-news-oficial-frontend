@@ -27,3 +27,15 @@ input.ng-invalid.ng-touched::placeholder {
   color: #d93025;
   opacity: 0.8;
 }
+
+.custom-success-snackbar {
+  background-color: green;
+  color: white;
+}
+
+.custom-error-snackbar {
+  background-color: rgb(235, 65, 65);
+  border-radius: 3px;
+  border: solid 3px rgb(233, 55, 55);
+  color: white;
+}

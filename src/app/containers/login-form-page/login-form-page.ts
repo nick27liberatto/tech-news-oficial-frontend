@@ -4,6 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { ValidationErrorMessageComponent } from '../../components/validation-error-message/validation-error-message.component';
 import { SupabaseService } from '../../services/supabase.service';
 import { AuthTokenResponsePassword } from '@supabase/supabase-js';
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { PasswordService } from '../../services/password.service';
 @Component({
   selector: 'app-login-form-page',
   imports: [ReactiveFormsModule, RouterLink, ValidationErrorMessageComponent],
@@ -13,12 +15,18 @@ import { AuthTokenResponsePassword } from '@supabase/supabase-js';
 export class LoginFormPage {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private passwordService = inject(PasswordService);
+
   form: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.email
     ]),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', [
+      Validators.required,
+      this.passwordService.passwordStrengthValidator()
+    ])
   });
 
   get email() {
@@ -35,6 +43,11 @@ export class LoginFormPage {
       .then((response:AuthTokenResponsePassword) => {
         if(response.error) {
           console.log('Erro ao realizar login.', response.error)
+          this.snackBar.open(response.error.message), {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          };
         } else {
           console.log('Sucesso ao realizar login!', response.data)
           this.router.navigate(['/home']);
@@ -49,11 +62,11 @@ export class LoginFormPage {
   }
 
   onGoogleLogin() {
-    console.log('Login com Google não implementado.');
+    this.supabaseService.signInWithSocialAccount('google');
   }
 
   onGithubLogin() {
-    console.log('Login com GitHub não implementado.');
+    this.supabaseService.signInWithSocialAccount('github');
   }
 
   onResetForm() {

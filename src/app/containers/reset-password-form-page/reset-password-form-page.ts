@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { FormValidationErrors } from '../../models/form-validation-errors.model';
 import { ValidationErrorMessageComponent } from '../../components/validation-error-message/validation-error-message.component';
 import { PasswordService } from '../../services/password.service';
 
@@ -14,8 +13,6 @@ import { PasswordService } from '../../services/password.service';
 })
 export class ResetPasswordFormPage {
   private passwordService = inject(PasswordService);
-
-  formValidationErrors: FormValidationErrors = new FormValidationErrors();
   form: FormGroup = new FormGroup({
     senha: new FormControl('', [
       Validators.required,
@@ -23,8 +20,7 @@ export class ResetPasswordFormPage {
       this.passwordService.passwordStrengthValidator()
     ]),
     confirmarSenha: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8)
+      Validators.required
     ]),
   }, {
     validators: [PasswordService.passwordMismatch('senha', 'confirmarSenha')]

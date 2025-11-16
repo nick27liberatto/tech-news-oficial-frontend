@@ -43,6 +43,11 @@ export class PasswordService {
         errors['passwordStrength'] = true;
       }
 
+      const minLength = 8 < value.length;
+      if (!minLength) {
+        this.passwordErrors.push('minlength');
+      }
+
       const lowerCaseRequired = /[a-z]/.test(value);
       if (!lowerCaseRequired) {
         this.passwordErrors.push('lowerCaseRequired');

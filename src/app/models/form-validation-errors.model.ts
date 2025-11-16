@@ -13,5 +13,5 @@ export class PasswordValidationErros  {
   lowerCaseRequired: string = 'É necessário pelo menos uma letra minúscula.';
   numberRequired: string = 'É necessário pelo menos um número.';
   specialCharacterRequired: string = 'É necessário pelo menos um caractere especial.';
-  maxlength: string = 'O campo deve ter no máximo 8 caracteres.';
+  minlength: string = 'O campo deve ter no mínimo 8 caracteres.';
 }
