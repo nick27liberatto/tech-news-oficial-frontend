@@ -9,7 +9,7 @@ const envFile = `export const environment = {
     SUPABASE_KEY: '${process.env.SUPABASE_KEY}',
 };
 `;
-const targetPath = path.join(__dirname, './src/environments/environment.ts');
+const targetPath = path.join(process.cwd(), './src/environments/environment.prod.ts');
 fs.writeFile(targetPath, envFile, (err) => {
     if (err) {
         console.error(err);
