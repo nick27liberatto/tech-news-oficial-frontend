@@ -11,5 +11,5 @@ export const routes: Routes = [
   { path: 'register', component: RegisterFormPage },
   { path: 'forgot-password', component: ForgotPasswordFormPage },
   { path: 'reset-password', component: ResetPasswordFormPage },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'login' }
 ];

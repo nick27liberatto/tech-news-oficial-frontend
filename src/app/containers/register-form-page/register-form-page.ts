@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { SupabaseService as SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-register-form-page',
@@ -9,16 +10,31 @@ import { RouterLink } from '@angular/router';
   styleUrl: './register-form-page.scss'
 })
 export class RegisterFormPage {
+  private supabaseService = inject(SupabaseService);
+  private router = inject(Router);
   form:FormGroup = new FormGroup({
-    usuario: new FormControl('', Validators.required),
-    nome: new FormControl('', Validators.required),
-    sobrenome: new FormControl('', Validators.required),
+    fullName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
 
   onSubmit(){
-    console.log("submit");
+    if (this.form.valid) {
+      this.supabaseService.signUp(this.form.value.fullName, this.form.value.email, this.form.value.password)
+      .then((response) => {
+        if(response.error) {
+          console.log('Erro ao realizar cadastro.', response.error)
+        } else {
+          console.log('Sucesso ao realizar cadastro!', response.data)
+          this.router.navigate(['/login']);
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao fazer login:', error);
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
     onGoogleLogin() {
