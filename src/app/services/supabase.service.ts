@@ -15,14 +15,23 @@ export class SupabaseService {
 
   constructor() {
     this.supabaseclient = createClient(environment.SUPABASE_URL, environment.SUPABASE_KEY);
+    this.AuthState();
+  }
+
+  AuthState(): boolean {
+    let isSignIn = false;
     this.supabaseclient.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        isSignIn = true;
         this.user.next(session!.user);
         this.router.navigate(['/home']);
       } else {
+        isSignIn = true;
         this.user.next(null);
       }
     });
+
+    return isSignIn;
   }
 
   signUp(fullName: string, email: string, password: string) {
@@ -39,7 +48,7 @@ export class SupabaseService {
     return this.supabaseclient.auth.signInWithPassword({ email, password });
   }
 
-  async signInWithSocialAccount(provider:Provider) {
+  async signInWithSocialAccount(provider: Provider) {
     await this.supabaseclient.auth.signInWithOAuth({
       provider: provider
     })
@@ -51,5 +60,9 @@ export class SupabaseService {
 
   get currentUser() {
     return this.user.asObservable();
+  }
+
+  get emailConfirmed() {
+    return false;
   }
 }

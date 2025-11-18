@@ -4,12 +4,15 @@ import { RegisterFormPage } from './containers/register-form-page/register-form-
 import { ForgotPasswordFormPage } from './containers/forgot-password-form-page/forgot-password-form-page';
 import { ResetPasswordFormPage } from './containers/reset-password-form-page/reset-password-form-page';
 import { HomePage } from './containers/home-page/home-page';
+import { authenticatedGuard } from './guards/authenticated-guard';
+import { resetPasswordGuard } from './guards/reset-password-guard';
 
 export const routes: Routes = [
-  {path: 'home', component: HomePage},
+  {path: 'home', component: HomePage, canActivate: [authenticatedGuard]},
   { path: 'login', component: LoginFormPage },
   { path: 'register', component: RegisterFormPage },
   { path: 'forgot-password', component: ForgotPasswordFormPage },
-  { path: 'reset-password', component: ResetPasswordFormPage },
+  { path: 'reset-password', component: ResetPasswordFormPage, canActivate: [resetPasswordGuard] },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: '**', redirectTo: 'login' }
 ];
