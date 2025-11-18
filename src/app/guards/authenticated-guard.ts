@@ -6,9 +6,11 @@ export const authenticatedGuard: CanActivateFn = (route, state) => {
   const supabaseService = inject(SupabaseService);
   const router = inject(Router);
 
-  if (!supabaseService.AuthState()) {
+  if (!supabaseService.isUserSignedIn) {
     router.navigate(['/login']);
+  } else {
+    router.navigate(['/home']);
   }
   
-  return supabaseService.AuthState();;
+  return supabaseService.isUserSignedIn;
 };
