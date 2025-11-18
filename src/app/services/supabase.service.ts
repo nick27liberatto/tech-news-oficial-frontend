@@ -74,6 +74,6 @@ export class SupabaseService {
   }
 
   get emailConfirmed() {
-    return false;
+    return true;
   }
 }

@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ValidationErrorMessageComponent } from '../../components/validation-error-message/validation-error-message.component';
 
 @Component({
   selector: 'app-forgot-password-form-page',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, ValidationErrorMessageComponent],
   templateUrl: './forgot-password-form-page.html',
   styleUrl: './forgot-password-form-page.scss'
 })
 export class ForgotPasswordFormPage {
     form:FormGroup = new FormGroup({
-    usuario: new FormControl('', Validators.required),
-    nome: new FormControl('', Validators.required),
-    sobrenome: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    email: new FormControl('', [Validators.required, Validators.email])
   });
 
   sendCode(){
@@ -23,5 +20,9 @@ export class ForgotPasswordFormPage {
 
   resetForm(){
     this.form.reset();
+  }
+
+  get email() {
+    return this.form.get('email') as FormControl;
   }
 }

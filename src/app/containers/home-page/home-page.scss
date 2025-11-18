@@ -1,140 +1,163 @@
-h1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card-container {
+    width: 100vh;
 }
-
-.home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    color: black;
-    padding: 30px;
-    border-radius: 8px;
-    width: 400px;
-    transition: 0.3s;
-}
-
-.home-container:hover{
-    padding: 36px;
-}
-
-.info {
-    font-size: 14px;
-    text-align: center;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    white-space: normal !important;
-    margin-bottom: 12px;
-}
-
-.home-container form {
-    display: flex;
-    flex-direction: column;
-}
-
-button, input {
-    margin: 10px auto;
-    width: 300px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: none;
-}
-
-.row{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-input{
-    background-color: black;
-    margin: 10px 10px;
-    padding: 15px;
-}
-
-input:focus{
-    border: 3px solid rgb(255, 183, 0);
-    outline: none;
-}
-
-input:hover{
-    background-color: rgb(33, 33, 33);
-}
-
-input::content,
-input::placeholder{
-    color: white;
-}
-
 button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-#home{
-    background-color: rgb(255, 183, 0);;
+    background-color: black;
     color: white;
 }
 
-#home:hover{
-    background-color: rgb(206, 148, 0);
+button:hover {
+    opacity: 90%;
 }
 
-.back-button{   
-    background-color: rgb(217, 217, 217);
-}
-
-.back-button:hover{
-    background-color: rgb(198, 198, 198);
-}
-
-.divisor {
+.header {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.divisor hr {
-    width: 100%;
+.header-item {
+    margin: auto 5px;
+}
+
+input {
+    width: 350px;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 6px;
+}
+
+.search-field {
+    height: 50px;
+    border-radius: 6px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-right: 5px;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+}
+
+.newsletter {
+    height: 60vh;
+    overflow-y: auto;
+    justify-content: start !important;
+}
+
+.newsletter-container {
+    border: solid 1px rgb(77, 77, 77);
+    border-radius: 6px;
+    border-color: #cacaca;
+    width: 400px;
+    margin: 30px auto;
+    box-sizing: content-box;
+}
+
+.newsletter-container:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+img {
+    height: 300px;
+    width: 400px;
+    margin: 0;
+}
+
+.newsletter-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin: 10px;
+}
+
+.user-avatar,
+.newsletter-header-user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.user-avatar {
+    border: solid 2px rgb(255, 183, 0);
+}
+
+.user-avatar:hover {
+    opacity: 90%;
+}
+
+.newsletter-header-user-avatar,
+.newsletter-header-user-information {
     margin: auto 10px;
 }
 
-.option{
-    padding: 6px;
-    background-color: rgb(224, 224, 224);
+#user-name {
+    font-weight: bold;
 }
 
-.option:hover{
-    background-color: rgb(207, 207, 207);
+#user-role {
+    font-size: 14px;
 }
 
-#login{
+.newsletter-content {
+    margin: 10px 20px;
+    text-align: justify;
+}
+
+.header-start,
+.header-end,
+.newsletter-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.search-button,
+.publish,
+.menu,
+.action {
+    margin: 10px;
+    padding: 10px 30px;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+}
+
+.search-button,
+.publish:hover,
+.menu:hover,
+.action:hover {
+    background-color: rgb(255, 183, 0);
+}
+
+.search-button,
+.publish,
+.menu {
+    width: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+mat-icon.notranslate.menu-icon.material-icons.mat-ligature-font.mat-icon-no-color,
+mat-icon.notranslate.search-button-icon.material-icons.mat-ligature-font.mat-icon-no-color,
+mat-icon.notranslate.add-icon.material-icons.mat-ligature-font.mat-icon-no-color {
+    margin: 0px;
+    color: white;
+}
+
+.search-button {
+    height: 50px;
     background-color: rgb(255, 183, 0);
     color: white;
+    font-weight: bold;
+    font-size: medium;
 }
 
-#login:hover{
-    background-color: rgb(206, 148, 0);
-}
-
-img{
-    width: 32px;
-    height: 32px;
-    margin: auto 10px;
-}
-
-p{
-    margin: 8px auto;
-}
-
-a{
-    color: rgb(255, 183, 0);
-}
-
-.sign-out {
-    background-color: black;
-    color: white;
-}

@@ -1,7 +1,11 @@
+//VARIABLES
+
+$base-error-color: #ff0800;
+
+//BASE
 
 * {
     font-family: "Roboto Mono", monospace;
-    overflow: hidden;
     transition: all 0.1s ease-in-out;
 }
 
@@ -14,28 +18,238 @@ body {
     margin: 0;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//INPUT
+
+input {
+    color: white;
+    background-color: black;
+}
+
+input:focus {
+    border: 3px solid rgb(255, 183, 0);
+    outline: none;
+}
+
+input:hover {
+    opacity: 90%;
+}
+
+input::content,
+input::placeholder {
+    color: white;
+}
 
 input.ng-invalid.ng-touched {
-  border: 2px solid #d93025; 
-  box-shadow: 0 0 0 1px #d93025, 0 0 0 4px rgba(217, 48, 37, 0.2);
-  outline: none; 
+    border: 2px solid #d93025;
+    outline: none;
 }
 
 input.ng-invalid.ng-touched::placeholder {
-  color: #d93025;
-  opacity: 0.8;
+    color: #d93025;
+    opacity: 0.8;
 }
 
+//SNACK BAR
+
 .custom-success-snackbar {
-  background-color: green;
-  color: white;
+    background-color: green;
+    color: white;
 }
 
 .custom-error-snackbar {
-  background-color: rgb(235, 65, 65);
-  border-radius: 3px;
-  border: solid 3px rgb(233, 55, 55);
-  color: white;
+    background-color: rgb(235, 65, 65);
+    border-radius: 3px;
+    border: solid 3px rgb(233, 55, 55);
+    color: white;
+}
+
+//GENERIC ELEMENTS
+
+img {
+    width: 32px;
+    height: 32px;
+    margin: auto 10px;
+}
+
+p {
+    margin: 8px auto;
+}
+
+a {
+    color: rgb(255, 183, 0);
+}
+
+a:hover {
+    color: rgb(206, 148, 0);
+}
+
+a:visited {
+    color: rgb(206, 103, 0);
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+//CARDS
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: black;
+    padding: 30px;
+    border-radius: 8px;
+    transition: 0.3s;
+    box-sizing: content-box;
+}
+
+.card-container:hover {
+    padding: 36px;
+}
+
+.card-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+//DIVISORS
+
+.divisor {
+    display: flex;
+}
+
+.divisor hr {
+    width: 100%;
+    margin: auto 10px;
+}
+
+//BUTTONS
+
+button,
+input {
+    margin: 10px auto;
+    width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: none;
+}
+
+button:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+}
+
+// ERRORS
+
+.error-icon {
+    color: $base-error-color;
+    font-size: 1rem;
+    margin-right: 8px;
+    padding: 6px;
+    line-height: 1;
+    font-style: normal;
+}
+
+.error-text {
+    width: 100%;
+    color: $base-error-color;
+    font-size: 0.85rem;
+    margin: 10px 0;
+    line-height: 1;
+    font-style: normal;
+}
+
+.error-message {
+    width: 300px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    background-color: #f5bfbd;
+    flex-direction: row;
+    box-sizing: border-box;
+    border: 1px solid $base-error-color;
+    border-radius: 3px;
+}
+
+//OPTIONS
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background-color: rgb(224, 224, 224);
+}
+
+//CUSTOM COLORS
+
+.yellow {
+    background-color: rgb(255, 183, 0);
+    ;
+    color: white;
+}
+
+//ANGULAR MATERIAL CUSTOM STYLES
+
+.mat-mdc-menu-panel {
+    background-color: #f0f0f0;
+}
+
+.mat-mdc-menu-panel .mat-mdc-menu-item {
+    color: rgb(255, 255, 255);
+}
+
+.mat-mdc-menu-panel .mat-mdc-menu-item .mat-mdc-menu-item-text {
+    color: rgb(255, 255, 255);
+}
+
+.mat-mdc-menu-panel .mat-mdc-menu-item:hover {
+    background-color: rgb(31, 31, 31) !important;
+    opacity: 100%;
+}
+
+mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color.menu-icon {
+    color: rgb(0, 0, 0);
+    margin: 0;
+    width: 40px;
+}
+
+button.mat-mdc-menu-item.mat-focus-indicator {
+    border-radius: 0px;
+}
+
+//SCROLLBAR
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(151, 151, 151);
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;  
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(167, 167, 167);
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;  
 }

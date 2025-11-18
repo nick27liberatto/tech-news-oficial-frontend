@@ -1,4 +1,114 @@
 <h1>Tech News Oficial</h1>
-<div class="home-container container">
-   <button class="sign-out" (click)="signOut()">Sair</button>
-</div> 
+<div class="card-container header">
+   <div class="header-start">
+      <div class="search-container">
+         <input class="search-field header-item" type="text" placeholder="Pesquise por Título ou Tema">
+         <mat-icon matSuffix class="search-icon">search</mat-icon>
+      </div>
+   </div>
+   <div class="header-end">
+      <button matButton class="publish header-item">
+         <mat-icon class="add-icon">add</mat-icon>
+      </button>
+      <button matButton [matMenuTriggerFor]="menu" class="menu header-item">
+         <mat-icon class="menu-icon">menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+         <button mat-menu-item>Configurações</button>
+         <button mat-menu-item>Tema</button>
+         <button mat-menu-item (click)="signOut()">Sair</button>
+      </mat-menu>
+      <img class="user-avatar header-item"
+         src="https://material.angular.dev/assets/img/examples/shiba1.jpg" alt="Avatar">
+   </div>
+</div>
+<br>
+<div class="card-container newsletter">
+   <div class="newsletter-container">
+      <div class="newsletter-header">
+         <img class="newsletter-header-user-avatar" src="https://material.angular.dev/assets/img/examples/shiba1.jpg"
+            alt="Avatar">
+         <div class="newsletter-header-user-information">
+            <p id="user-name">{{userFullName}}</p>
+            <p id="user-role">{{userRole}}</p>
+         </div>
+      </div>
+      <img src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <div class="newsletter-content">
+         <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+         </p>
+      </div>
+      <div class="newsletter-actions">
+         <button class="action">
+            <mat-icon>favorite</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>comment</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>share</mat-icon>
+         </button>
+      </div>
+   </div>
+   <div class="newsletter-container">
+      <div class="newsletter-header">
+         <img class="newsletter-header-user-avatar" src="https://material.angular.dev/assets/img/examples/shiba1.jpg"
+            alt="Avatar">
+         <div class="newsletter-header-user-information">
+            <p id="user-name">{{userFullName}}</p>
+            <p id="user-role">{{userRole}}</p>
+         </div>
+      </div>
+      <img src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <div class="newsletter-content">
+         <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+         </p>
+      </div>
+      <div class="newsletter-actions">
+         <button class="action">
+            <mat-icon>favorite</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>comment</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>share</mat-icon>
+         </button>
+      </div>
+   </div>
+   <div class="newsletter-container">
+      <div class="newsletter-header">
+         <img class="newsletter-header-user-avatar" src="https://material.angular.dev/assets/img/examples/shiba1.jpg"
+            alt="Avatar">
+         <div class="newsletter-header-user-information">
+            <p id="user-name">{{userFullName}}</p>
+            <p id="user-role">{{userRole}}</p>
+         </div>
+      </div>
+      <img src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <div class="newsletter-content">
+         <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+         </p>
+      </div>
+      <div class="newsletter-actions">
+         <button class="action">
+            <mat-icon>favorite</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>comment</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>share</mat-icon>
+         </button>
+      </div>
+   </div>
+</div>

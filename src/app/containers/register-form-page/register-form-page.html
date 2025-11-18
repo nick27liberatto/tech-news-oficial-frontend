@@ -1,5 +1,5 @@
 <h1>Cadastro</h1>
-<div class="register-container">
+<div class="card-container">
     <form action="#" [formGroup]="form">
         <input type="text" placeholder="Nome Completo" formControlName="fullName">
         <app-error-message [control]="fullName"></app-error-message>
@@ -9,7 +9,7 @@
         <app-error-message [control]="password"></app-error-message>
         <input type="password" placeholder="Confirmar Senha" formControlName="confirmPassword">
         <app-error-message [control]="confirmPassword"></app-error-message>
-        <button type="submit" id="register" (click)="onSubmit()"> Criar Conta </button>
+        <button type="submit" class="yellow" (click)="onSubmit()"> Criar Conta </button>
         <button class="back-button" (click)="resetForm()" [routerLink]="['/login']"> Voltar </button>
         <div class="divisor"><hr>ou<hr></div>
         <button class="option" id="google" (click)="onGoogleLogin()"> <img src="/assets/images/google-icon.png" alt="Google Icon"> Google </button>

@@ -16,7 +16,6 @@ export class ResetPasswordFormPage {
   form: FormGroup = new FormGroup({
     senha: new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
       this.passwordService.passwordStrengthValidator()
     ]),
     confirmarSenha: new FormControl('', [
