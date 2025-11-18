@@ -1,7 +1,8 @@
-import { Injectable, } from '@angular/core';
+import { inject, Injectable, } from '@angular/core';
 import { createClient, Provider, SupabaseClient, User } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment.prod';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +10,16 @@ import { BehaviorSubject } from 'rxjs';
 
 export class SupabaseService {
   private supabaseclient: SupabaseClient;
+  private router = inject(Router);
   private user = new BehaviorSubject<User | null>(null);
-  public isUserSignedIn: boolean = false;
+
   constructor() {
     this.supabaseclient = createClient(environment.SUPABASE_URL, environment.SUPABASE_KEY);
-    this.AuthState();
-  }
-
-  AuthState() {
     this.supabaseclient.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        this.isUserSignedIn = true;
         this.user.next(session!.user);
+        this.router.navigate(['/home']);
       } else {
-        this.isUserSignedIn = true;
         this.user.next(null);
       }
     });
@@ -50,9 +47,29 @@ export class SupabaseService {
 
   async signOut() {
     await this.supabaseclient.auth.signOut();
+    await this.supabaseclient.auth.refreshSession();
   }
 
-  get currentUser() {
+  async checkAuthentication(): Promise<boolean> {
+    const { data: { session }, error } = await this.supabaseclient.auth.getSession();
+
+    if (error) {
+      console.error('Error getting session:', error.message);
+      this.router.navigate(['/login']);
+      return false;
+    }
+
+    if (session) {
+      console.log('User is authenticated:', session.user);
+      return true;
+    } else {
+      console.log('User is not authenticated.');
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+
+  get currentUser$() {
     return this.user.asObservable();
   }
 

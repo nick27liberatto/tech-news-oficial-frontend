@@ -1,16 +1,8 @@
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { SupabaseService } from '../services/supabase.service';
 import { inject } from '@angular/core';
 
 export const authenticatedGuard: CanActivateFn = (route, state) => {
   const supabaseService = inject(SupabaseService);
-  const router = inject(Router);
-
-  if (!supabaseService.isUserSignedIn) {
-    router.navigate(['/login']);
-  } else {
-    router.navigate(['/home']);
-  }
-  
-  return supabaseService.isUserSignedIn;
+  return supabaseService.checkAuthentication();
 };
