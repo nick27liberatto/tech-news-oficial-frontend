@@ -24,7 +24,7 @@ export class ForgotPasswordFormPage {
     }
 
     const response = await this.supabaseService.client.auth.resetPasswordForEmail(this.email.value, {
-      redirectTo: 'reset-password'
+      redirectTo: 'https://technewsoficial.vercel.app/reset-password'
     });
 
     if (response.error) {
