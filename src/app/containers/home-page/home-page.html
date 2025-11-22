@@ -2,113 +2,55 @@
 <div class="card-container header">
    <div class="header-start">
       <div class="search-container">
-         <input class="search-field header-item" type="text" placeholder="Pesquise por Título ou Tema">
+         <input class="search-field header-item" type="text" placeholder="Pesquise por Usuário ou Notícia">
          <mat-icon matSuffix class="search-icon">search</mat-icon>
       </div>
    </div>
    <div class="header-end">
-      <button matButton class="publish header-item">
+      <button matButton class="publish header-item" [routerLink]="['/new']">
          <mat-icon class="add-icon">add</mat-icon>
       </button>
       <button matButton [matMenuTriggerFor]="menu" class="menu header-item">
          <mat-icon class="menu-icon">menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-         <button mat-menu-item>Configurações</button>
          <button mat-menu-item>Tema</button>
          <button mat-menu-item (click)="signOut()">Sair</button>
       </mat-menu>
-      <img class="user-avatar header-item"
-         src="https://material.angular.dev/assets/img/examples/shiba1.jpg" alt="Avatar">
+      <img class="user-avatar header-item" [src]="user?.avatar_url || 'assets/images/avatar/default-avatar.png'"
+         alt="Avatar">
    </div>
 </div>
 <br>
 <div class="card-container newsletter">
-   <div class="newsletter-container">
-      <div class="newsletter-header">
-         <img class="newsletter-header-user-avatar" src="https://material.angular.dev/assets/img/examples/shiba1.jpg"
-            alt="Avatar">
-         <div class="newsletter-header-user-information">
-            <p id="user-name">{{userFullName}}</p>
-            <p id="user-role">{{userRole}}</p>
+   @for (item of news; track $index) {
+      <div class="newsletter-container">
+         <div class="newsletter-header">
+            <img class="newsletter-header-user-avatar" [src]="item.profiles?.avatar_url || 'assets/images/avatar/default-avatar.png'"
+               alt="Avatar">
+            <div class="newsletter-header-user-information">
+               <p id="user-name">{{item.profiles?.full_name || obterUsuarioPorEmail(item.profiles?.email)}}</p>
+               <p id="created-at">{{item.created_at | date:'short':'GMT-3':'pt-BR'}}</p>
+            </div>
+         </div>
+         <img [src]="item.imageUrl || 'assets/images/default/default-image.jpg'" alt="News Image" id="newsletter-image">
+         <div class="newsletter-content">
+            <strong id="newsletter-title">{{item.title}}</strong>
+            <p id="newsletter-description">
+               {{item.description}}
+            </p>
+         </div>
+         <div class="newsletter-actions">
+            <button class="action">
+               <mat-icon>favorite</mat-icon>
+            </button>
+            <button class="action">
+               <mat-icon>comment</mat-icon>
+            </button>
+            <button class="action">
+               <mat-icon>share</mat-icon>
+            </button>
          </div>
       </div>
-      <img src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <div class="newsletter-content">
-         <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-         </p>
-      </div>
-      <div class="newsletter-actions">
-         <button class="action">
-            <mat-icon>favorite</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>comment</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>share</mat-icon>
-         </button>
-      </div>
-   </div>
-   <div class="newsletter-container">
-      <div class="newsletter-header">
-         <img class="newsletter-header-user-avatar" src="https://material.angular.dev/assets/img/examples/shiba1.jpg"
-            alt="Avatar">
-         <div class="newsletter-header-user-information">
-            <p id="user-name">{{userFullName}}</p>
-            <p id="user-role">{{userRole}}</p>
-         </div>
-      </div>
-      <img src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <div class="newsletter-content">
-         <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-         </p>
-      </div>
-      <div class="newsletter-actions">
-         <button class="action">
-            <mat-icon>favorite</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>comment</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>share</mat-icon>
-         </button>
-      </div>
-   </div>
-   <div class="newsletter-container">
-      <div class="newsletter-header">
-         <img class="newsletter-header-user-avatar" src="https://material.angular.dev/assets/img/examples/shiba1.jpg"
-            alt="Avatar">
-         <div class="newsletter-header-user-information">
-            <p id="user-name">{{userFullName}}</p>
-            <p id="user-role">{{userRole}}</p>
-         </div>
-      </div>
-      <img src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <div class="newsletter-content">
-         <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-         </p>
-      </div>
-      <div class="newsletter-actions">
-         <button class="action">
-            <mat-icon>favorite</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>comment</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>share</mat-icon>
-         </button>
-      </div>
-   </div>
+   }
 </div>

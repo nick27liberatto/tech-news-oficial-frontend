@@ -1,0 +1,24 @@
+<h1>Criar Notícia</h1>
+<div class="card-container">
+    <form [formGroup]="form">
+        <div class="form-wrapper">
+            <div class="form-group">
+                <input type="text" class="title" formControlName="title" placeholder="Título">
+                <textarea class="body" formControlName="body" placeholder="Texto"></textarea>
+            </div>
+            @if(previewUrl) {
+            <img [src]="previewUrl" id="preview" class="image-preview" alt="Image Preview">
+            } @else {
+            <label for="file-image" class="file-uploader">
+                <input type="file" accept=".jpg, .jpeg, .png" formControlName="image" name="file-image" id="file-image" (change)="onFileSelected($event)">
+                <div class="file-icon">
+                    <mat-icon>add</mat-icon>
+                    Adicionar Imagem
+                </div>
+            </label>
+            }
+        </div>
+        <button type="submit" class="submit-button yellow" [routerLink]="['/home']" (click)="onSubmit()"> Publicar Notícia </button>
+        <button class="back-button" (click)="onReset()" [routerLink]="['/home']"> Voltar </button>
+    </form>
+</div>

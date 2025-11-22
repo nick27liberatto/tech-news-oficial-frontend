@@ -25,6 +25,10 @@ export class SupabaseService {
     });
   }
 
+  supabaseClient() : SupabaseClient {
+    return this.supabaseclient;
+  }
+
   signUp(fullName: string, email: string, password: string) {
     return this.supabaseclient.auth.signUp({
       email, password, options: {
@@ -69,8 +73,9 @@ export class SupabaseService {
     }
   }
 
-  get currentUser$() {
-    return this.user.asObservable();
+  async loggedUser() {
+    const { data: user } = await this.supabaseclient.auth.getUser();
+    return user;
   }
 
   get emailConfirmed() {

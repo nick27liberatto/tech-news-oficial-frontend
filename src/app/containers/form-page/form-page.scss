@@ -1,0 +1,53 @@
+.form-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.title {
+    width: 100%;
+}
+
+.back-button {
+    background-color: black;
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #333333;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.image-preview {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.file-uploader {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+.file-uploader:hover {
+    border-color: #999;
+    color: #333;
+}
+
+.file-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
