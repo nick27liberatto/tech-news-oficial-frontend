@@ -80,7 +80,9 @@ textarea::placeholder {
 //SNACK BAR
 
 .custom-success-snackbar {
-    background-color: green;
+    background-color: rgb(0, 187, 47);
+    border-radius: 3px;
+    border: solid 3px rgb(137, 211, 107);
     color: white;
 }
 

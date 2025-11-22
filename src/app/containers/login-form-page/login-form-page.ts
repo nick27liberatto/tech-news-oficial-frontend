@@ -3,7 +3,6 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { ValidationErrorMessageComponent } from '../../components/validation-error-message/validation-error-message.component';
 import { SupabaseService } from '../../services/supabase.service';
-import { AuthTokenResponsePassword } from '@supabase/supabase-js';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { PasswordService } from '../../services/password.service';
 @Component({
@@ -37,29 +36,28 @@ export class LoginFormPage {
     return this.form.get('password') as FormControl;
   }
 
-  onSubmit() {
-    if (this.form.valid) {
-      this.supabaseService.signIn(this.form.value.email, this.form.value.password)
-        .then((response) => {
-          if (response.error) {
-            console.log('Erro ao realizar login.', response.error)
-            this.snackBar.open(response.error.message, undefined), {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-              panelClass: 'custom-error-snackbar'
-            };
-          } else {
-            console.log('Sucesso ao realizar login!', response.data)
-            this.router.navigate(['/home']);
-          }
-        })
-        .catch((error) => {
-          console.error('Erro ao fazer login:', error);
-        });
-    } else {
+  async onSubmit() {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
+      return;
     }
+
+    const response = await this.supabaseService.signIn(this.email.value, this.password.value);
+
+    if (response.error) {
+      console.log('Erro ao realizar login.', response.error)
+      this.snackBar.open(response.error.message, undefined), {
+        duration: 3000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        panelClass: 'custom-error-snackbar'
+      };
+      return;
+    }
+
+    console.log('Sucesso ao realizar login!', response.data)
+    this.router.navigate(['/home']);
+    return;
   }
 
   onGoogleLogin() {

@@ -30,29 +30,34 @@ export class RegisterFormPage {
     validators: [PasswordService.passwordMismatch('password', 'confirmPassword')]
   });
 
-  onSubmit() {
-    if (this.form.valid) {
-      this.supabaseService.signUp(this.form.value.fullName, this.form.value.email, this.form.value.password)
-        .then((response) => {
-          if (response.error) {
-            console.log('Erro ao realizar cadastro.', response.error)
-            this.snackBar.open(response.error.message, undefined), {
-              duration: 3000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-              panelClass: 'custom-error-snackbar'
-            };
-          } else {
-            console.log('Sucesso ao realizar cadastro!', response.data)
-            this.router.navigate(['/login']);
-          }
-        })
-        .catch((error) => {
-          console.error('Erro ao fazer login:', error);
-        });
-    } else {
+  async onSubmit() {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
+      return;
     }
+
+    const response = await this.supabaseService.signUp(this.fullName.value, this.email.value, this.password.value);
+
+    if (response.error) {
+      console.log('Erro ao realizar cadastro.', response.error)
+      this.snackBar.open(response.error.message, undefined), {
+        duration: 3000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        panelClass: 'custom-error-snackbar'
+      };
+      return;
+    }
+    
+    console.log('Sucesso ao realizar cadastro!', response.data)
+    this.snackBar.open('Cadastro realizado com sucesso!', undefined, {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      panelClass: 'custom-success-snackbar'
+    });
+
+    this.router.navigate(['/login']);
   }
 
   onGoogleLogin() {

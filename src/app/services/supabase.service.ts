@@ -14,7 +14,12 @@ export class SupabaseService {
   private user = new BehaviorSubject<User | null>(null);
 
   constructor() {
-    this.supabaseclient = createClient(environment.SUPABASE_URL, environment.SUPABASE_KEY);
+    this.supabaseclient = createClient(environment.SUPABASE_URL, environment.SUPABASE_KEY, {
+      auth: {
+        persistSession: true,
+        detectSessionInUrl: true
+      }
+    });
     this.supabaseclient.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         this.user.next(session!.user);

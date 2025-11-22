@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { ValidationErrorMessageComponent } from '../../components/validation-error-message/validation-error-message.component';
 import { SupabaseService } from '../../services/supabase.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-forgot-password-form-page',
@@ -12,6 +13,7 @@ import { SupabaseService } from '../../services/supabase.service';
 })
 export class ForgotPasswordFormPage {
     private supabaseService = inject(SupabaseService);
+    private snackBar = inject(MatSnackBar);
     emailSent: boolean = false;
     form:FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email])
@@ -29,6 +31,12 @@ export class ForgotPasswordFormPage {
 
     if (response.error) {
       console.error('Error sending password reset email:', response.error.message);
+      this.snackBar.open(response.error.message, undefined, {
+        duration: 5000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        panelClass: 'custom-snackbar-error'
+      });
       return;
     }
 
