@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     this.user = await this.supabaseService.loggedUser();
+    
     this.loadNewsletters();
 
     this.newsletterService.refresh$.subscribe(() => {

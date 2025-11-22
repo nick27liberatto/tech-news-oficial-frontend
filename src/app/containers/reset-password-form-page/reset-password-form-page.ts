@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { ValidationErrorMessageComponent } from '../../components/validation-error-message/validation-error-message.component';
 import { PasswordService } from '../../services/password.service';
+import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-reset-password-form-page',
@@ -12,6 +13,7 @@ import { PasswordService } from '../../services/password.service';
   styleUrl: './reset-password-form-page.scss'
 })
 export class ResetPasswordFormPage {
+  private supabaseService = inject(SupabaseService);
   private passwordService = inject(PasswordService);
   form: FormGroup = new FormGroup({
     senha: new FormControl('', [
@@ -25,11 +27,19 @@ export class ResetPasswordFormPage {
     validators: [PasswordService.passwordMismatch('senha', 'confirmarSenha')]
   });
 
-  onSubmit() {
-    if (this.form.valid) {
-      console.log('Formulário enviado:', this.form.value);
-    } else {
+  async onSubmit() {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
+      return;
+    }
+
+    const { data, error }  = await this.supabaseService.client.auth.updateUser({
+      password: this.senha.value
+    });
+
+    if (error) {
+      console.error('Error updating password:', error.message);
+      return;
     }
   }
 

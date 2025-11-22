@@ -36,12 +36,12 @@ export class RegisterFormPage {
         .then((response) => {
           if (response.error) {
             console.log('Erro ao realizar cadastro.', response.error)
-            this.snackBar.open(response.error.message, undefined, {
+            this.snackBar.open(response.error.message, undefined), {
               duration: 3000,
               horizontalPosition: 'end',
               verticalPosition: 'top',
               panelClass: 'custom-error-snackbar'
-            });
+            };
           } else {
             console.log('Sucesso ao realizar cadastro!', response.data)
             this.router.navigate(['/login']);

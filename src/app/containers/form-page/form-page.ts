@@ -16,7 +16,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class FormPage {
   private newsletterService = inject(NewsletterService);
   private supabaseService = inject(SupabaseService);
-  private supabaseClient = this.supabaseService.supabaseClient();
   private snackBar = inject(MatSnackBar);
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
@@ -42,7 +41,7 @@ export class FormPage {
 
   private async newsletterDto(): Promise<NewsletterWithFile> {
     const newsletter = this.form.value;
-    const { data: { user } } = await this.supabaseClient.auth.getUser();
+    const { data: { user } } = await this.supabaseService.client.auth.getUser();
 
     return {
       title: newsletter.title,

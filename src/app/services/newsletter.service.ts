@@ -12,13 +12,12 @@ import { BehaviorSubject } from "rxjs";
 
 export class NewsletterService {
     private supabaseService = inject(SupabaseService);
-    private supabaseclient = this.supabaseService.supabaseClient();
     private storageService = inject(StorageService);
     private _refresh$ = new BehaviorSubject<void>(undefined);
     refresh$ = this._refresh$.asObservable();
 
     async getAll() {
-        const {data, error } = await this.supabaseclient
+        const {data, error } = await this.supabaseService.client
             .from('newsletter')
             .select('*, profiles:user_id (full_name, email, avatar_url, role)')
             .order('created_at', { ascending: false });
@@ -35,7 +34,7 @@ export class NewsletterService {
     }
 
     getById(id: number) {
-        return this.supabaseclient.from('newsletter').select('*').eq('id', id).single();
+        return this.supabaseService.client.from('newsletter').select('*').eq('id', id).single();
     }
 
     async publish(newsletter: NewsletterWithFile) {
@@ -53,14 +52,14 @@ export class NewsletterService {
 
         this._refresh$.next();
 
-        return this.supabaseclient.from('newsletter').insert(payload);
+        return this.supabaseService.client.from('newsletter').insert(payload);
     }
 
     update(id: number, newsletter: Newsletter) {
-        return this.supabaseclient.from('newsletter').update(newsletter).eq('id', id);
+        return this.supabaseService.client.from('newsletter').update(newsletter).eq('id', id);
     }
 
     delete(id: number) {
-        return this.supabaseclient.from('newsletter').delete().eq('id', id);
+        return this.supabaseService.client.from('newsletter').delete().eq('id', id);
     }
 }

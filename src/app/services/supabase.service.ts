@@ -25,7 +25,7 @@ export class SupabaseService {
     });
   }
 
-  supabaseClient() : SupabaseClient {
+  get client() {
     return this.supabaseclient;
   }
 
@@ -74,8 +74,8 @@ export class SupabaseService {
   }
 
   async loggedUser() {
-    const { data: user } = await this.supabaseclient.auth.getUser();
-    return user;
+    const { data } = await this.supabaseclient.auth.getUser();
+    return data.user;
   }
 
   get emailConfirmed() {

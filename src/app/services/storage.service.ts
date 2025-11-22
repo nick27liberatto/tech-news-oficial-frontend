@@ -10,7 +10,6 @@ import { v4 as uuid } from 'uuid';
 
 export class StorageService {
     private supabaseService = inject(SupabaseService);
-    private supabaseclient: SupabaseClient = this.supabaseService.supabaseClient();
 
     constructor() { }
 
@@ -19,7 +18,7 @@ export class StorageService {
 
         filePath = this.generateFilePath(file);
 
-        const { data, error } = await this.supabaseclient
+        const { data, error } = await this.supabaseService.client
             .storage
             .from(bucket)
             .upload(filePath, file);
@@ -29,15 +28,15 @@ export class StorageService {
     }
 
     updateFile(bucket: eBucketName, file: File, path: string) {
-        return this.supabaseclient.storage.from(bucket).update(path, file);
+        return this.supabaseService.client.storage.from(bucket).update(path, file);
     }
 
     downloadFile(bucket: eBucketName, filePath: string) {
-        return this.supabaseclient.storage.from(bucket).download(filePath);
+        return this.supabaseService.client.storage.from(bucket).download(filePath);
     }
 
     deleteFile(bucket: eBucketName, filePath: string) {
-        return this.supabaseclient.storage.from(bucket).remove([filePath]);
+        return this.supabaseService.client.storage.from(bucket).remove([filePath]);
     }
 
     private generateFilePath(file: File): string {

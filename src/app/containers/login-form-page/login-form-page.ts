@@ -40,22 +40,23 @@ export class LoginFormPage {
   onSubmit() {
     if (this.form.valid) {
       this.supabaseService.signIn(this.form.value.email, this.form.value.password)
-      .then((response:AuthTokenResponsePassword) => {
-        if(response.error) {
-          console.log('Erro ao realizar login.', response.error)
-          this.snackBar.open(response.error.message), {
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          };
-        } else {
-          console.log('Sucesso ao realizar login!', response.data)
-          this.router.navigate(['/home']);
-        }
-      })
-      .catch((error) => {
-        console.error('Erro ao fazer login:', error);
-      });
+        .then((response) => {
+          if (response.error) {
+            console.log('Erro ao realizar login.', response.error)
+            this.snackBar.open(response.error.message, undefined), {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              panelClass: 'custom-error-snackbar'
+            };
+          } else {
+            console.log('Sucesso ao realizar login!', response.data)
+            this.router.navigate(['/home']);
+          }
+        })
+        .catch((error) => {
+          console.error('Erro ao fazer login:', error);
+        });
     } else {
       this.form.markAllAsTouched();
     }
