@@ -68,22 +68,19 @@ export class SupabaseService {
     await this.supabaseclient.auth.refreshSession();
   }
 
-  async checkAuthentication(): Promise<boolean> {
+  async checkAuthentication() {
     const { data: { session }, error } = await this.supabaseclient.auth.getSession();
 
     if (error) {
       console.error('Error getting session:', error.message);
       this.router.navigate(['/login']);
-      return false;
     }
 
     if (session) {
       console.log('User is authenticated:', session.user);
-      return true;
     } else {
       console.log('User is not authenticated.');
       this.router.navigate(['/login']);
-      return false;
     }
   }
 
