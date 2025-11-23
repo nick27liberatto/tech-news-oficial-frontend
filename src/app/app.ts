@@ -31,12 +31,15 @@ export class App implements AfterViewInit{
   }
 
   toggleTheme() {
-    this.themeService.toggleTheme();
-    this.themeIcon = this.themeIcon == 'wb_sunny' ? 'nights_stay' : 'wb_sunny';
-    this.backgroundPath = this.backgroundPath == 
-    '/assets/background/grid-sci-fi-background-dark.mp4' ?
-    '/assets/background/grid-sci-fi-background-light.mp4' :
-    '/assets/background/grid-sci-fi-background-dark.mp4';
+    const theme = this.themeService.toggleTheme();
+
+    if (theme == 'dark') {
+      this.themeIcon = 'wb_sunny';
+      this.backgroundPath = '/assets/background/grid-sci-fi-background-light.mp4';
+    } else {
+      this.themeIcon = 'nights_stay';
+      this.backgroundPath = '/assets/background/grid-sci-fi-background-dark.mp4';
+    }
   }
 
   pauseVideo(){
