@@ -44,6 +44,15 @@ export class SupabaseService {
     });
   }
 
+  signInWithOtp(email:string) {
+    return this.supabaseclient.auth.signInWithOtp({
+      email: email,
+      options: {
+        emailRedirectTo: 'http://localhost:4200/home'
+      }
+    });
+  }
+
   signIn(email: string, password: string) {
     return this.supabaseclient.auth.signInWithPassword({ email, password });
   }

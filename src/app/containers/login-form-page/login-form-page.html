@@ -1,17 +1,34 @@
 <h1>Entrar</h1>
 <div class="card-container">
-    <form action="#" [formGroup]="form">
-      <input type="text" placeholder="E-mail" formControlName="email">
-      <app-error-message [control]="email"></app-error-message>
+  <form action="#" [formGroup]="form">
+    <input type="text" placeholder="E-mail" formControlName="email">
+    <app-error-message [control]="email"></app-error-message>
+    @if(!isMagicLink){
       <input type="password" placeholder="Senha" formControlName="password">
       <app-error-message [control]="password"></app-error-message>
-      <button type="submit" class="yellow" (click)="onSubmit()"> Entrar </button>
-      <div class="divisor"><hr>ou<hr></div>
-      <button class="option" id="google" (click)="onGoogleLogin()"> <img src="/assets/images/icons/google-icon.png" alt="Google Icon"> Google </button>
-      <button class="option" id="github" (click)="onGithubLogin()"> <img src="/assets/images/icons/github-icon-dark.png" alt="GitHub Icon"> GitHub </button>
-    </form>
-    <p><a (click)="onResetForm()" [routerLink]="['/forgot-password']"> Esqueceu a senha? </a></p>
-</div>  
+    }
+    <button type="submit" class="yellow" (click)="onSubmit()"> Entrar </button>
+    <div class="divisor">
+      <hr>ou
+      <hr>
+    </div>
+    <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="loginType" class="segmented-control"
+      hideSingleSelectionIndicator>
+
+      <mat-button-toggle value="password">
+        Email & Password </mat-button-toggle>
+
+      <mat-button-toggle value="magic-link">
+        Magic Link </mat-button-toggle>
+
+    </mat-button-toggle-group>
+    <button class="option" id="google" (click)="onGoogleLogin()"> <img src="/assets/images/icons/google-icon.png"
+        alt="Google Icon"> Google </button>
+    <button class="option" id="github" (click)="onGithubLogin()"> <img src="/assets/images/icons/github-icon-dark.png"
+        alt="GitHub Icon"> GitHub </button>
+  </form>
+  <p><a (click)="onResetForm()" [routerLink]="['/forgot-password']"> Esqueceu a senha? </a></p>
+</div>
 <br>
 <div class="card-container">
   <p>Não tem uma conta? <a [routerLink]="['/register']"> Cadastre-se </a></p>

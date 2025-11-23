@@ -18,6 +18,8 @@ $main-success-border-color: rgb(137, 211, 107);
     
     //BUTTON
     --main-button-background-color: rgb(233, 233, 233);
+    --main-button-hover-color: rgb(218, 218, 218);
+    --main-button-active-color: rgb(179, 179, 179);
     --main-hover-opacity: 90%;
 
     //TITLES
@@ -370,4 +372,35 @@ div.mat-mdc-menu-content {
     border: 4px solid transparent;
     border-radius: 8px;
     background-clip: padding-box;
+}
+
+//BUTTON GROUP
+
+mat-button-toggle-group.segmented-control.mat-button-toggle-group-appearance-standard {
+    border-radius: 3px; 
+}
+
+.segmented-control {
+    background-color: var(--main-button-background-color); 
+    border-radius: 3px; 
+    border: none;
+    display: inline-flex; 
+    margin: 10px auto;
+    padding: 3px;
+    width: 290px;
+}
+
+.segmented-control .mat-button-toggle {
+    border: none;
+    color: var(--main-text-color);
+    background-color: transparent;
+    box-sizing: border-box;
+    border-radius: 3px;
+    transition: background-color 0.5s ease;
+}
+
+.segmented-control .mat-button-toggle-checked {
+    background-color: var(--main-button-hover-color) !important; 
+    color: var(--main-text-color) !important;
+    width: 100%;
 }
