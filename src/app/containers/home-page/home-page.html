@@ -16,31 +16,34 @@
       <img matButton [matMenuTriggerFor]="menu" class="user-avatar header-item"
          [src]="user?.user_metadata['picture'] || 'assets/images/avatar/default-avatar.png'" alt="Avatar">
       <mat-menu #menu="matMenu">
-         <button mat-menu-item routerLink="/settings">Configurações</button>
+         <!-- <button mat-menu-item routerLink="/settings">Configurações</button> -->
          <button mat-menu-item (click)="signOut()">Sair</button>
       </mat-menu>
    </div>
 </div>
 <br>
 <div class="card-container newsletter">
-   @for (item of news; track $index) {
-   <div class="newsletter-container">
-      <div class="newsletter-header">
-         <img class="newsletter-header-user-avatar"
-            [src]="item?.profile_avatar_url || 'assets/images/avatar/default-avatar.png'" alt="Avatar">
-         <div class="newsletter-header-user-information">
-            <p id="user-name">{{item?.profile_full_name || obterUsuarioPorEmail(item?.profile_email)}}</p>
-            <p id="created-at">{{item.created_at | date:'short':'GMT-3':'pt-BR'}}</p>
-         </div>
-      </div>
-      <img [src]="item.imageUrl || 'assets/images/default/default-image.jpg'" alt="News Image" id="newsletter-image">
-      <div class="newsletter-content">
-         <strong id="newsletter-title">{{item.title}}</strong>
-         <p id="newsletter-description">
-            {{item.description}}
-         </p>
-      </div>
-      <!-- <div class="newsletter-actions">
+   <mat-tab-group>
+      <mat-tab label="Comunidade">
+         @for (item of news; track $index) {
+         <div class="newsletter-container">
+            <div class="newsletter-header">
+               <img class="newsletter-header-user-avatar"
+                  [src]="item?.profile_avatar_url || 'assets/images/avatar/default-avatar.png'" alt="Avatar">
+               <div class="newsletter-header-user-information">
+                  <p id="user-name">{{item?.profile_full_name || obterUsuarioPorEmail(item?.profile_email)}}</p>
+                  <p id="created-at">{{item.created_at | date:'short':'GMT-3':'pt-BR'}}</p>
+               </div>
+            </div>
+            <img [src]="item.imageUrl || 'assets/images/default/default-image.jpg'" alt="News Image"
+               id="newsletter-image">
+            <div class="newsletter-content">
+               <strong id="newsletter-title">{{item.title}}</strong>
+               <p id="newsletter-description">
+                  {{item.description}}
+               </p>
+            </div>
+            <!-- <div class="newsletter-actions">
          <button class="action">
             <mat-icon>favorite</mat-icon>
          </button>
@@ -51,6 +54,39 @@
             <mat-icon>share</mat-icon>
          </button>
       </div> -->
-   </div>
-   }
+         </div>
+         }
+      </mat-tab>
+      <mat-tab label="Notícias">
+         @for (item of externalNews; track $index) {
+         <div class="newsletter-container">
+            <div class="newsletter-header">
+               <div class="newsletter-header-user-information">
+                  <p id="user-name">{{item?.author}}</p>
+                  <p id="created-at">{{item.publishedAt | date:'short':'GMT-3':'pt-BR'}}</p>
+               </div>
+            </div>
+            <img [src]="item.urlToImage || 'assets/images/default/default-image.jpg'" alt="News Image"
+               id="newsletter-image">
+            <div class="newsletter-content">
+               <strong id="newsletter-title">{{item.title}}</strong>
+               <p id="newsletter-description">
+                  {{item.description}}
+               </p>
+            </div>
+            <!-- <div class="newsletter-actions">
+         <button class="action">
+            <mat-icon>favorite</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>comment</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>share</mat-icon>
+         </button>
+      </div> -->
+         </div>
+         }
+      </mat-tab>
+   </mat-tab-group>
 </div>

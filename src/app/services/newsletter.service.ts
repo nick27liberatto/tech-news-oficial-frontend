@@ -3,8 +3,10 @@ import { SupabaseService } from "./supabase.service";
 import { Newsletter, NewsletterWithFile } from "../models/newsletter.model";
 import { StorageService } from "./storage.service";
 import { eBucketName } from "../shared/enums/bucket-name.enum";
+import { NewsApiResponse } from "../models/news-api.model";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 import { environment } from "../../environments/environment.prod";
-import { BehaviorSubject } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +15,12 @@ import { BehaviorSubject } from "rxjs";
 export class NewsletterService {
     private supabaseService = inject(SupabaseService);
     private storageService = inject(StorageService);
-    private _refresh$ = new BehaviorSubject<void>(undefined);
-    refresh$ = this._refresh$.asObservable();
+    private httpClient = inject(HttpClient);
+
+    getNewsFromExternalApi() : Observable<NewsApiResponse> {
+        const url = `https://newsapi.org/v2/top-headlines?apiKey=${environment.NEWS_API_KEY}&country=us`;
+        return this.httpClient.get<NewsApiResponse>(url);
+    }
 
     async getAll(search: string = '') {
         let query = this.supabaseService.client
@@ -55,8 +61,6 @@ export class NewsletterService {
             imageUrl: newsletter.imageUrl,
             user_id: newsletter.user_id
         };
-
-        this._refresh$.next();
 
         return this.supabaseService.client.from('newsletter').insert(payload);
     }
