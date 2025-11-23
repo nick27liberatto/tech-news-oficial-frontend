@@ -1,0 +1,16 @@
+<h1>Configurar Autenticação Multifator</h1>
+<div class="card-container">
+  @if(qrUri) {
+  <p>Escaneie este QR Code no Google Authenticator, Authy, Microsoft Authenticator ou qualquer app TOTP.</p>
+
+  <div class="qr-wrapper">
+    <qr-code [value]="qrUri" class="qr-size">
+    </qr-code>
+  </div>
+
+  <p class="tip">Depois de escanear, clique em continuar para validar o código.</p>
+
+  <button class="option yellow" (click)="goToVerify()">Continuar</button>
+  }
+  <button class="option" routerLink="/home"> Voltar </button>
+</div>

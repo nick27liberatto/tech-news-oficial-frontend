@@ -1,9 +1,10 @@
 <h1>Configurações</h1>
 <div class="card-container">
   <div class="settings">
-    <mat-slide-toggle class="slide mfa"> Autenticação Multifator </mat-slide-toggle>
+    <mat-slide-toggle class="slide mfa" [checked]="mfaEnabled" (change)="toggleMfa($event)"> Autenticação Multifator
+    </mat-slide-toggle>
   </div>
   <br>
-  <button class="yellow" routerLink="/home"> Salvar </button>
+  <button class="yellow" (click)="onSubmit()"> Salvar </button>
   <button class="back-button" routerLink="/home"> Voltar </button>
 </div>

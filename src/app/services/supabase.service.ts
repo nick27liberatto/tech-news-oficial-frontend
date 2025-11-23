@@ -34,12 +34,6 @@ export class SupabaseService {
     return this.supabaseclient;
   }
 
-  async createTotpFactor() {
-    return await this.supabaseclient.auth.mfa.enroll({
-      factorType: 'totp'
-    });
-  }
-
   signUp(fullName: string, email: string, password: string) {
     return this.supabaseclient.auth.signUp({
       email, password, options: {
@@ -50,7 +44,7 @@ export class SupabaseService {
     });
   }
 
-  signInWithOtp(email:string) {
+  signInWithOtp(email: string) {
     return this.supabaseclient.auth.signInWithOtp({
       email: email,
       options: {
@@ -96,9 +90,5 @@ export class SupabaseService {
   async loggedUser() {
     const { data } = await this.supabaseclient.auth.getUser();
     return data.user;
-  }
-
-  get emailConfirmed() {
-    return true;
   }
 }

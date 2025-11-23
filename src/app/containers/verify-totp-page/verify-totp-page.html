@@ -1,0 +1,9 @@
+<h1>Autenticação Multifator</h1>
+  <div class="card-container">
+    <p>Digite o código de Autenticação Multifator</p>
+    <form [formGroup]="form">
+      <input type="text" formControlName="code" maxlength="6" placeholder="000000">
+      <button class="option yellow" (click)="verify()"> Enviar </button>
+      <button class="option" routerLink="/login"> Voltar </button>
+    </form>
+  </div>

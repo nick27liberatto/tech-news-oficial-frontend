@@ -15,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ThemeService } from '../../services/theme-service';
 import { debounceTime } from 'rxjs';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { User } from '@supabase/auth-js';
 
 @Component({
   selector: 'app-home-page',
@@ -33,7 +34,7 @@ export class HomePage implements OnInit {
   private themeService = inject(ThemeService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
-  public user: any;
+  user:any;
   news: NewsletterWithProfile[] = [];
   form: FormGroup = new FormGroup({
     search: new FormControl('')
@@ -48,13 +49,13 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.user = await this.supabaseService.loggedUser();
-
     this.loadNewsletters();
 
     this.search.valueChanges.pipe(debounceTime(500)).subscribe(value => {
       this.loadNewsletters(value);
     });
+
+    this.user = await this.supabaseService.loggedUser() as User;
   }
 
   async loadNewsletters(search: string = '') {

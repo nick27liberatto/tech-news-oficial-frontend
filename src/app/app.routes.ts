@@ -5,10 +5,11 @@ import { ForgotPasswordFormPage } from './containers/forgot-password-form-page/f
 import { ResetPasswordFormPage } from './containers/reset-password-form-page/reset-password-form-page';
 import { HomePage } from './containers/home-page/home-page';
 import { authenticatedGuard } from './guards/authenticated-guard';
-import { resetPasswordGuard } from './guards/reset-password-guard';
 import { FormPage } from './containers/form-page/form-page';
 import { ConfirmEmailPage } from './containers/confirm-email-page/confirm-email-page';
 import { SettingsPage } from './containers/settings-page/settings-page';
+import { VerifyTotpPage } from './containers/verify-totp-page/verify-totp-page';
+import { SetupMfaPage } from './containers/setup-mfa-page/setup-mfa-page';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,14 @@ export const routes: Routes = [
     component: LoginFormPage
   },
   {
+    path: 'verify-totp',
+    component: VerifyTotpPage
+  },
+  {
+    path: 'setup-mfa',
+    component: SetupMfaPage
+  },
+  {
     path: 'register',
     component: RegisterFormPage
   },
@@ -46,8 +55,7 @@ export const routes: Routes = [
   },
   {
     path: 'reset-password',
-    component: ResetPasswordFormPage,
-    canActivate: [resetPasswordGuard]
+    component: ResetPasswordFormPage
   },
   {
     path: '',

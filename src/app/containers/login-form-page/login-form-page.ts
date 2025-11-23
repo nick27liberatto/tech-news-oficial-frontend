@@ -79,6 +79,18 @@ export class LoginFormPage implements OnInit {
       });
       return;
     }
+
+    if (response.data.mfa) {
+      let mfa = response.data.mfa;
+      const factorId = mfa.factors[0].id;
+      const challengeId = mfa.factors[0].challengeId;
+
+      localStorage.setItem('mfa_factor_id', factorId);
+      localStorage.setItem('mfa_challenge_id', challengeId);
+
+      this.router.navigate(['/verify-totp']);
+      return;
+    }
     
     let successMsg = this.isMagicLink ? 'E-mail enviado com sucesso!' : 'Sucesso ao realizar login!';
     
