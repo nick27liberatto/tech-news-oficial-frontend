@@ -48,7 +48,7 @@ export class SupabaseService {
     return this.supabaseclient.auth.signInWithOtp({
       email: email,
       options: {
-        emailRedirectTo: 'http://localhost:4200/home'
+        emailRedirectTo: 'https://technewsoficial.vercel.app/home'
       }
     });
   }
