@@ -1,6 +1,6 @@
 //VARIABLES
-$main-error-color: #ff0800;
-$main-error-border-color: rgb(235, 65, 65);
+$main-error-color: #ff4c46;
+$main-error-border-color: rgb(228, 86, 86);
 $main-error-message-background-color: #f5bfbd;
 $main-success-color: rgb(0, 187, 47);
 $main-success-border-color: rgb(137, 211, 107);
@@ -171,7 +171,7 @@ textarea::placeholder {
     background-color: $main-error-color;
     border-radius: 3px;
     border: solid 3px $main-error-border-color;
-    color: var(--main-text-color);
+    color: white;
 }
 
 //GENERIC ELEMENTS

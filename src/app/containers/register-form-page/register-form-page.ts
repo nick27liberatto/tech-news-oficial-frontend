@@ -57,7 +57,7 @@ export class RegisterFormPage {
       panelClass: 'custom-success-snackbar'
     });
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/confirm-email']);
   }
 
   onGoogleLogin() {

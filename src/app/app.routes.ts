@@ -7,6 +7,7 @@ import { HomePage } from './containers/home-page/home-page';
 import { authenticatedGuard } from './guards/authenticated-guard';
 import { resetPasswordGuard } from './guards/reset-password-guard';
 import { FormPage } from './containers/form-page/form-page';
+import { ConfirmEmailPage } from './containers/confirm-email-page/confirm-email-page';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterFormPage
+  },
+  {
+    path: 'confirm-email',
+    component: ConfirmEmailPage
   },
   {
     path: 'forgot-password',
