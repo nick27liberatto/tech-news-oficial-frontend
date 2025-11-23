@@ -1,4 +1,4 @@
-<video #bgVideo autoplay playsinline muted loop class="background-video" [src]="backgroundPath"></video>
+<video #bgVideo autoplay playsinline muted loop class="background-video" [ngClass]="{'invert': isDarkTheme}" [src]="backgroundPath"></video>
 <mat-icon class="icon video" (click)="pauseVideo()">{{videoIcon}}</mat-icon>
 <mat-icon class="icon theme" (click)="toggleTheme()">{{themeIcon}}</mat-icon>
 <router-outlet></router-outlet>

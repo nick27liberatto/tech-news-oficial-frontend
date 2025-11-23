@@ -2,10 +2,11 @@ import { AfterViewInit, Component, ElementRef, inject, OnInit, signal, ViewChild
 import { MatIconModule } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './services/theme-service';
+import { NgClass } from "../../node_modules/@angular/common";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatIconModule],
+  imports: [RouterOutlet, MatIconModule, NgClass],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -13,13 +14,14 @@ export class App implements AfterViewInit, OnInit {
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
   private themeService = inject(ThemeService);
   isPaused: boolean = false;
-  backgroundPath: string = '';
+  isDarkTheme: boolean = false;
+  backgroundPath: string = '/assets/background/background-theme.mp4';
   themeIcon: string = 'wb_sunny';
   videoIcon: string = 'pause';
 
   ngOnInit(): void {
     this.themeService.currentTheme.subscribe(value => {
-      this.backgroundPath = `/assets/background/background-${value}-theme.mp4`;
+      this.isDarkTheme = value === 'dark';
       this.themeIcon = value === 'dark' ? 'wb_sunny' : 'nights_stay';
     });
   }
