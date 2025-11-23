@@ -34,6 +34,12 @@ export class SupabaseService {
     return this.supabaseclient;
   }
 
+  async createTotpFactor() {
+    return await this.supabaseclient.auth.mfa.enroll({
+      factorType: 'totp'
+    });
+  }
+
   signUp(fullName: string, email: string, password: string) {
     return this.supabaseclient.auth.signUp({
       email, password, options: {

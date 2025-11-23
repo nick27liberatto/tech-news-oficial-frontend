@@ -8,12 +8,17 @@ import { authenticatedGuard } from './guards/authenticated-guard';
 import { resetPasswordGuard } from './guards/reset-password-guard';
 import { FormPage } from './containers/form-page/form-page';
 import { ConfirmEmailPage } from './containers/confirm-email-page/confirm-email-page';
+import { SettingsPage } from './containers/settings-page/settings-page';
 
 export const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
     canActivate: [authenticatedGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsPage
   },
   {
     path: 'new',
