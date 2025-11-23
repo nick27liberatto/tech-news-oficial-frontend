@@ -16,11 +16,17 @@ export class NewsletterService {
     private _refresh$ = new BehaviorSubject<void>(undefined);
     refresh$ = this._refresh$.asObservable();
 
-    async getAll() {
-        const {data, error } = await this.supabaseService.client
-            .from('newsletter')
-            .select('*, profiles:user_id (full_name, email, avatar_url, role)')
-            .order('created_at', { ascending: false });
+    async getAll(search: string = '') {
+        let query = this.supabaseService.client
+            .from('newsletter_with_profiles')
+            .select('*');
+
+        if (search) {
+            const searchTerm = `%${search}%`;
+            query = query.ilike('search_text', searchTerm);
+        }
+
+        const { data, error } = await query.order('created_at', { ascending: false });
 
         if (error) throw error;
 

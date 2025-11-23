@@ -15,3 +15,17 @@ export interface Profile {
     avatar_url: string;
     role: string;
 }
+
+export interface NewsletterWithProfile {
+    id:number
+    title:string
+    description:string
+    created_at:string
+    imageUrl:string
+    user_id:string
+    profile_id:string
+    profile_full_name:string
+    profile_email:string
+    profile_avatar_url:string
+    profile_role:string
+}

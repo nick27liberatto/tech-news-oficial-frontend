@@ -2,16 +2,19 @@
 <div class="card-container header">
    <div class="header-start">
       <div class="search-container">
-         <input class="search-field header-item" type="text" placeholder="Pesquise por Usuário ou Notícia">
-         <mat-icon matSuffix class="search-icon">search</mat-icon>
+         <form [formGroup]="form">
+            <input class="search-field header-item" type="text" formControlName="search"
+               placeholder="Pesquise por Usuário ou Título da Notícia">
+            <mat-icon matSuffix class="search-icon">search</mat-icon>
+         </form>
       </div>
    </div>
    <div class="header-end">
       <button matButton class="publish header-item" [routerLink]="['/new']">
          <mat-icon class="add-icon">add</mat-icon>
       </button>
-      <img matButton [matMenuTriggerFor]="menu" class="user-avatar header-item" [src]="user?.avatar_url || 'assets/images/avatar/default-avatar.png'"
-         alt="Avatar">
+      <img matButton [matMenuTriggerFor]="menu" class="user-avatar header-item"
+         [src]="user?.avatar_url || 'assets/images/avatar/default-avatar.png'" alt="Avatar">
       <mat-menu #menu="matMenu">
          <button mat-menu-item routerLink="/settings">Configurações</button>
          <button mat-menu-item (click)="signOut()">Sair</button>
@@ -21,33 +24,33 @@
 <br>
 <div class="card-container newsletter">
    @for (item of news; track $index) {
-      <div class="newsletter-container">
-         <div class="newsletter-header">
-            <img class="newsletter-header-user-avatar" [src]="item.profiles?.avatar_url || 'assets/images/avatar/default-avatar.png'"
-               alt="Avatar">
-            <div class="newsletter-header-user-information">
-               <p id="user-name">{{item.profiles?.full_name || obterUsuarioPorEmail(item.profiles?.email)}}</p>
-               <p id="created-at">{{item.created_at | date:'short':'GMT-3':'pt-BR'}}</p>
-            </div>
-         </div>
-         <img [src]="item.imageUrl || 'assets/images/default/default-image.jpg'" alt="News Image" id="newsletter-image">
-         <div class="newsletter-content">
-            <strong id="newsletter-title">{{item.title}}</strong>
-            <p id="newsletter-description">
-               {{item.description}}
-            </p>
-         </div>
-         <div class="newsletter-actions">
-            <button class="action">
-               <mat-icon>favorite</mat-icon>
-            </button>
-            <button class="action">
-               <mat-icon>comment</mat-icon>
-            </button>
-            <button class="action">
-               <mat-icon>share</mat-icon>
-            </button>
+   <div class="newsletter-container">
+      <div class="newsletter-header">
+         <img class="newsletter-header-user-avatar"
+            [src]="item?.profile_avatar_url || 'assets/images/avatar/default-avatar.png'" alt="Avatar">
+         <div class="newsletter-header-user-information">
+            <p id="user-name">{{item?.profile_full_name || obterUsuarioPorEmail(item?.profile_email)}}</p>
+            <p id="created-at">{{item.created_at | date:'short':'GMT-3':'pt-BR'}}</p>
          </div>
       </div>
+      <img [src]="item.imageUrl || 'assets/images/default/default-image.jpg'" alt="News Image" id="newsletter-image">
+      <div class="newsletter-content">
+         <strong id="newsletter-title">{{item.title}}</strong>
+         <p id="newsletter-description">
+            {{item.description}}
+         </p>
+      </div>
+      <!-- <div class="newsletter-actions">
+         <button class="action">
+            <mat-icon>favorite</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>comment</mat-icon>
+         </button>
+         <button class="action">
+            <mat-icon>share</mat-icon>
+         </button>
+      </div> -->
+   </div>
    }
 </div>
