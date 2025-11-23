@@ -9,18 +9,25 @@ import { ThemeService } from './services/theme-service';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App implements AfterViewInit{
+export class App implements AfterViewInit, OnInit {
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
   private themeService = inject(ThemeService);
-  isPaused:boolean = false;
-  backgroundPath:string = '/assets/background/grid-sci-fi-background-dark.mp4';
-  themeIcon:string = 'wb_sunny';
-  videoIcon:string = 'pause';
+  isPaused: boolean = false;
+  backgroundPath: string = '';
+  themeIcon: string = 'wb_sunny';
+  videoIcon: string = 'pause';
 
-   ngAfterViewInit(): void {
+  ngOnInit(): void {
+    this.themeService.currentTheme.subscribe(value => {
+      this.backgroundPath = `/assets/background/background-${value}-theme.mp4`;
+      this.themeIcon = value === 'dark' ? 'wb_sunny' : 'nights_stay';
+    });
+  }
+
+  ngAfterViewInit(): void {
     const video = this.bgVideo.nativeElement;
 
-    video.muted = true; 
+    video.muted = true;
 
     video.play().then(() => {
       this.isPaused = false;
@@ -31,21 +38,13 @@ export class App implements AfterViewInit{
   }
 
   toggleTheme() {
-    const theme = this.themeService.toggleTheme();
-
-    if (theme == 'dark') {
-      this.themeIcon = 'wb_sunny';
-      this.backgroundPath = '/assets/background/grid-sci-fi-background-light.mp4';
-    } else {
-      this.themeIcon = 'nights_stay';
-      this.backgroundPath = '/assets/background/grid-sci-fi-background-dark.mp4';
-    }
+    return this.themeService.toggleTheme();
   }
 
-  pauseVideo(){
+  pauseVideo() {
     const video = this.bgVideo.nativeElement;
 
-    if(video.paused) {
+    if (video.paused) {
       video.play();
       this.isPaused = false;
       this.videoIcon = 'pause';

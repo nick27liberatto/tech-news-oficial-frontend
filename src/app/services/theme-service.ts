@@ -31,7 +31,7 @@ export class ThemeService {
     }
   }
 
-  toggleTheme(): string {
+  toggleTheme() {
     const isDark = this.themeSubject.value === 'dark';
     const newTheme = isDark ? 'light' : 'dark';
 
@@ -44,6 +44,5 @@ export class ThemeService {
     this.themeSubject.next(newTheme);
 
     localStorage.setItem(this.STORAGE_KEY, newTheme);
-    return newTheme;
   }
 }
