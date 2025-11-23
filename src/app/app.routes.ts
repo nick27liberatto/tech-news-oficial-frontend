@@ -34,7 +34,7 @@ export const routes: Routes = [
     component: LoginFormPage
   },
   {
-    path: 'verify-totp',
+    path: 'verify-mfa',
     component: VerifyTotpPage
   },
   {
