@@ -17,7 +17,7 @@ import { debounceTime, Observable } from 'rxjs';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '@supabase/auth-js';
 import {MatTabsModule} from '@angular/material/tabs';
-import { Article, NewsApiResponse } from '../../models/news-api.model';
+import { Post, WebzApiResponse } from '../../models/news-api.model';
 
 @Component({
   selector: 'app-home-page',
@@ -39,8 +39,8 @@ export class HomePage implements OnInit {
   private snackBar = inject(MatSnackBar);
   user:any;
   news: NewsletterWithProfile[] = [];
-  response$:Observable<NewsApiResponse> = new Observable<NewsApiResponse>;
-  externalNews:Article[] = [];
+  response$:Observable<WebzApiResponse> = new Observable<WebzApiResponse>;
+  externalNews:Post[] = [];
   form: FormGroup = new FormGroup({
     search: new FormControl('')
   });
@@ -68,7 +68,7 @@ export class HomePage implements OnInit {
     try {
       this.response$ = await this.newsletterService.getNewsFromExternalApi()
       this.response$.subscribe(value => {
-        this.externalNews = value.articles;
+        this.externalNews = value.posts;
       });
     } catch (error) {
       console.log('Erro ao carregar notícias: ', error);
@@ -93,6 +93,10 @@ export class HomePage implements OnInit {
         panelClass: 'custom-error-snackbar'
       });
     }
+  }
+
+  onSource(url:string) {
+    window.location.href = url;
   }
 
   obterUsuarioPorEmail(email: string | undefined): string {

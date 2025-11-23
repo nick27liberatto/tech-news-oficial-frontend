@@ -59,32 +59,21 @@
       </mat-tab>
       <mat-tab label="Notícias">
          @for (item of externalNews; track $index) {
-         <div class="newsletter-container">
+         <div class="newsletter-container" (click)="onSource(item.url)">
             <div class="newsletter-header">
                <div class="newsletter-header-user-information">
-                  <p id="user-name">{{item?.author}}</p>
-                  <p id="created-at">{{item.publishedAt | date:'short':'GMT-3':'pt-BR'}}</p>
+                  <p id="user-name">{{item.author || item.thread.site}}</p>
+                  <p id="created-at">{{item.published | date:'short':'GMT-3':'pt-BR'}}</p>
                </div>
             </div>
-            <img [src]="item.urlToImage || 'assets/images/default/default-image.jpg'" alt="News Image"
+            <img [src]="item.thread.main_image || 'assets/images/default/default-image.jpg'" alt="News Image"
                id="newsletter-image">
             <div class="newsletter-content">
-               <strong id="newsletter-title">{{item.title}}</strong>
+               <strong id="newsletter-title">{{item.thread.title}}</strong>
                <p id="newsletter-description">
-                  {{item.description}}
+                  {{item.text}}
                </p>
             </div>
-            <!-- <div class="newsletter-actions">
-         <button class="action">
-            <mat-icon>favorite</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>comment</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>share</mat-icon>
-         </button>
-      </div> -->
          </div>
          }
       </mat-tab>

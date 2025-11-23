@@ -3,7 +3,7 @@ import { SupabaseService } from "./supabase.service";
 import { Newsletter, NewsletterWithFile } from "../models/newsletter.model";
 import { StorageService } from "./storage.service";
 import { eBucketName } from "../shared/enums/bucket-name.enum";
-import { NewsApiResponse } from "../models/news-api.model";
+import { WebzApiResponse } from "../models/news-api.model";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment.prod";
@@ -17,9 +17,9 @@ export class NewsletterService {
     private storageService = inject(StorageService);
     private httpClient = inject(HttpClient);
 
-    getNewsFromExternalApi() : Observable<NewsApiResponse> {
-        const url = `https://newsapi.org/v2/top-headlines?apiKey=${environment.NEWS_API_KEY}&country=us`;
-        return this.httpClient.get<NewsApiResponse>(url);
+    getNewsFromExternalApi() : Observable<WebzApiResponse> {
+        const url = `https://api.webz.io/newsApiLite?token=${environment.NEWS_API_KEY}&q=tecnologia&language=portuguese&breaking=true`;
+        return this.httpClient.get<WebzApiResponse>(url);
     }
 
     async getAll(search: string = '') {
