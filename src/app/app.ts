@@ -13,7 +13,7 @@ export class App implements AfterViewInit{
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
   private themeService = inject(ThemeService);
   isPaused:boolean = false;
-  backgroundPath:string = '/assets/background/grid-sci-fi-background-light.mp4';
+  backgroundPath:string = '/assets/background/grid-sci-fi-background-dark.mp4';
   themeIcon:string = 'wb_sunny';
   videoIcon:string = 'pause';
 
