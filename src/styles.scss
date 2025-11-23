@@ -1,6 +1,89 @@
 //VARIABLES
+$main-error-color: #ff0800;
+$main-error-border-color: rgb(235, 65, 65);
+$main-error-message-background-color: #f5bfbd;
+$main-success-color: rgb(0, 187, 47);
+$main-success-border-color: rgb(137, 211, 107);
 
-$base-error-color: #ff0800;
+//LIGHT THEME
+:root {
+    //MAIN BACKGROUND AND TEXT
+    --main-background-color: white;
+    --main-text-color: black;
+    
+    //INPUT
+    --main-input-background-color: black;
+    --main-input-text-color: white;
+    --main-input-focus-border-color: rgb(255, 183, 0);
+    
+    //BUTTON
+    --main-button-background-color: rgb(233, 233, 233);
+    --main-hover-opacity: 90%;
+
+    //TITLES
+    --main-title-color: white;
+    
+    //NEWSLETTER CARD
+    --main-newsletter-hover-color: rgb(219, 219, 219);
+
+    //YELLOW
+    --primary-color: rgb(255, 183, 0);
+    --primary-hover-color: rgb(206, 148, 0);
+    --primary-active-color: rgb(206, 103, 0);
+    --primary-text-color: white;
+    
+    //WHITE
+    --secondary-color: rgb(255, 255, 255);
+    --secondary-hover-color: rgb(109, 109, 109);
+    --secondary-active-color: rgb(65, 65, 65);
+    --secondary-text-color: black;
+    
+    //BLACK
+    --tertiary-color: rgb(0, 0, 0);
+    --tertiary-hover-color: rgb(39, 39, 39);
+    --tertiary-active-color: rgb(78, 78, 78);
+    --tertiary-text-color: white;
+}
+
+//DARK THEME
+:root .dark-theme {
+    //MAIN BACKGROUND AND TEXT
+    --main-background-color: black;
+    --main-text-color: white;
+    
+    //INPUT
+    --main-input-background-color: white;
+    --main-input-text-color: black;
+    --main-input-focus-border-color: rgb(255, 183, 0);
+    
+    //BUTTON
+    --main-button-background-color: rgb(61, 61, 61);
+    --main-hover-opacity: 90%;
+
+    //NEWSLETTER CARD
+    --main-newsletter-hover-color: rgb(37, 37, 37);
+
+    //TITLES
+    --main-title-color: black;
+    
+    //YELLOW
+    --primary-color: rgb(255, 183, 0);
+    --primary-hover-color: rgb(206, 148, 0);
+    --primary-active-color: rgb(206, 103, 0);
+    --primary-text-color: white;
+    
+    //BLACK
+    --secondary-color: rgb(0, 0, 0);
+    --secondary-hover-color: rgb(32, 32, 32);
+    --secondary-active-color: rgb(78, 78, 78);
+    --secondary-text-color: white;
+    
+    //WHITE
+    --tertiary-color: rgb(255, 255, 255);
+    --tertiary-hover-color: rgb(192, 192, 192);
+    --tertiary-active-color: rgb(139, 139, 139);
+    --tertiary-text-color: black;
+}
 
 //BASE
 
@@ -10,7 +93,7 @@ $base-error-color: #ff0800;
 }
 
 body {
-    color: white;
+    color: var(--main-text-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,32 +104,32 @@ body {
 //INPUT
 
 input {
-    color: white;
-    background-color: black;
+    color: var(--main-input-text-color);
+    background-color: var(--main-input-background-color);
 }
 
 input:focus {
-    border: 3px solid rgb(255, 183, 0);
+    border: 3px solid var(--main-input-focus-border-color);
     outline: none;
 }
 
 input:hover {
-    opacity: 90%;
+    opacity: var(--main-hover-opacity);
 }
 
 input::content,
 input::placeholder {
-    color: white;
+    color: var(--main-input-text-color);
 }
 
 input.ng-invalid.ng-touched {
-    border: 2px solid #d93025;
+    border: 2px solid $main-error-color;
     outline: none;
 }
 
 input.ng-invalid.ng-touched::placeholder {
-    color: #d93025;
-    opacity: 0.8;
+    color: $main-error-color;
+    opacity: var(--main-hover-opacity);
 }
 
 textarea {
@@ -54,43 +137,41 @@ textarea {
     height: 150px;
     padding: 12px;
     box-sizing: border-box;
-    border: 2px solid #ccc;
     border-radius: 4px;
-    background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
-    color: white;
-    background-color: black;
+    color: var(--tertiary-text-color);
+    background-color: var(--tertiary-color);
 }
 
 textarea:focus {
-    border: 3px solid rgb(255, 183, 0);
+    border: 3px solid var(--main-input-focus-border-color);
     outline: none;
 }
 
 textarea:hover {
-    opacity: 90%;
+    opacity: var(--main-hover-opacity);
 }
 
 textarea::content,
 textarea::placeholder {
-    color: white;
+    color: var(--main-text-color);
 }
 
 //SNACK BAR
 
 .custom-success-snackbar {
-    background-color: rgb(0, 187, 47);
+    background-color: $main-success-color;
     border-radius: 3px;
-    border: solid 3px rgb(137, 211, 107);
+    border: solid 3px $main-success-border-color;
     color: white;
 }
 
 .custom-error-snackbar {
-    background-color: rgb(235, 65, 65);
+    background-color: $main-error-color;
     border-radius: 3px;
-    border: solid 3px rgb(233, 55, 55);
-    color: white;
+    border: solid 3px $main-error-border-color;
+    color: var(--main-text-color);
 }
 
 //GENERIC ELEMENTS
@@ -106,21 +187,22 @@ p {
 }
 
 a {
-    color: rgb(255, 183, 0);
+    color: var(--primary-color);
 }
 
 a:hover {
-    color: rgb(206, 148, 0);
+    color: var(--primary-hover-color);
 }
 
 a:visited {
-    color: rgb(206, 103, 0);
+    color: var(--primary-active-color);
 }
 
 h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--main-title-color);
 }
 
 //CARDS
@@ -130,8 +212,8 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: white;
-    color: black;
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
     padding: 30px;
     border-radius: 8px;
     transition: 0.3s;
@@ -178,7 +260,7 @@ button:hover {
 // ERRORS
 
 .error-icon {
-    color: $base-error-color;
+    color: $main-error-color;
     font-size: 1rem;
     margin-right: 8px;
     padding: 6px;
@@ -188,7 +270,7 @@ button:hover {
 
 .error-text {
     width: 100%;
-    color: $base-error-color;
+    color: $main-error-color;
     font-size: 0.85rem;
     margin: 10px 0;
     line-height: 1;
@@ -200,10 +282,10 @@ button:hover {
     height: auto;
     display: flex;
     align-items: center;
-    background-color: #f5bfbd;
+    background-color: $main-error-message-background-color;
     flex-direction: row;
     box-sizing: border-box;
-    border: 1px solid $base-error-color;
+    border: 1px solid $main-error-color;
     border-radius: 3px;
 }
 
@@ -214,38 +296,38 @@ button:hover {
     align-items: center;
     justify-content: center;
     padding: 6px;
-    background-color: rgb(224, 224, 224);
+    background-color: var(--main-button-background-color);
+    color: var(--main-text-color);
 }
 
 //CUSTOM COLORS
 
 .yellow {
-    background-color: rgb(255, 183, 0);
-    ;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
 }
 
-//ANGULAR MATERIAL CUSTOM STYLES
+//MENU
 
 .mat-mdc-menu-panel {
-    background-color: #f0f0f0;
-}
-
-.mat-mdc-menu-panel .mat-mdc-menu-item {
-    color: rgb(255, 255, 255);
+    background-color: var(--secondary-color);
 }
 
 .mat-mdc-menu-panel .mat-mdc-menu-item .mat-mdc-menu-item-text {
-    color: rgb(255, 255, 255);
+    color: var(--secondary-text-color);
 }
 
 .mat-mdc-menu-panel .mat-mdc-menu-item:hover {
-    background-color: rgb(31, 31, 31) !important;
+    background-color: var(--secondary-hover-color) !important;
     opacity: 100%;
 }
 
+button.mat-mdc-menu-item.mat-focus-indicator {
+    background-color: var(--secondary-color);
+}
+
 mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color.menu-icon {
-    color: rgb(0, 0, 0);
+    color: var(--secondary-color);
     margin: 0;
     width: 40px;
 }
@@ -255,9 +337,9 @@ button.mat-mdc-menu-item.mat-focus-indicator {
 }
 
 div.mat-mdc-menu-content {
+    background-color: var(--secondary-color);
     margin-top: 3px;
-    background-color: black;
-    border-radius: 6px;
+    border-radius: 3px;
 }
 
 //SCROLLBAR
@@ -267,24 +349,24 @@ div.mat-mdc-menu-content {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--secondary-color);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--secondary-hover-color);
     border-radius: 100vw;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(151, 151, 151);
+    background-color: var(--secondary-active-color);
     border: 4px solid transparent;
     border-radius: 8px;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(167, 167, 167);
+    background-color: var(--secondary-hover-color);
     border: 4px solid transparent;
     border-radius: 8px;
     background-clip: padding-box;

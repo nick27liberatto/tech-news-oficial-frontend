@@ -4,16 +4,24 @@
 }
 
 .title {
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-text-color);
+    border: 1px solid var(--tertiary-active-color);
     width: 100%;
 }
 
+.title:focus {
+    border: 3px solid var(--primary-color);
+    outline: none;
+}
+
 .back-button {
-    background-color: black;
-    color: white;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-text-color);
 }
 
 .back-button:hover {
-    background-color: #333333;
+    background-color: var(--tertiary-hover-color);
 }
 
 input[type="file"] {
@@ -30,19 +38,19 @@ input[type="file"] {
 .file-uploader {
     width: 200px;
     height: 200px;
-    border: 2px dashed #ccc;
+    border: 2px dashed var(--secondary-active-color);
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-size: 14px;
-    color: #666;
+    color: var(--secondary-text-color);
 }
 
 .file-uploader:hover {
-    border-color: #999;
-    color: #333;
+    border-color: var(--tertiary-active-color);
+    color: var(--tertiary-active-color);
 }
 
 .file-icon {

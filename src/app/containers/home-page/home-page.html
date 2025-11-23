@@ -10,15 +10,11 @@
       <button matButton class="publish header-item" [routerLink]="['/new']">
          <mat-icon class="add-icon">add</mat-icon>
       </button>
-      <button matButton [matMenuTriggerFor]="menu" class="menu header-item">
-         <mat-icon class="menu-icon">menu</mat-icon>
-      </button>
+      <img matButton [matMenuTriggerFor]="menu" class="user-avatar header-item" [src]="user?.avatar_url || 'assets/images/avatar/default-avatar.png'"
+         alt="Avatar">
       <mat-menu #menu="matMenu">
-         <button mat-menu-item>Tema</button>
          <button mat-menu-item (click)="signOut()">Sair</button>
       </mat-menu>
-      <img class="user-avatar header-item" [src]="user?.avatar_url || 'assets/images/avatar/default-avatar.png'"
-         alt="Avatar">
    </div>
 </div>
 <br>

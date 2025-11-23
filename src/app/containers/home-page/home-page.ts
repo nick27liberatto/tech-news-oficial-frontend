@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ThemeService } from '../../services/theme-service';
 
 @Component({
   selector: 'app-home-page',
@@ -23,6 +24,7 @@ export class HomePage implements OnInit {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
   private newsletterService = inject(NewsletterService);
+  private themeService = inject(ThemeService);
   public user: any;
 
   news: Newsletter[] = [];
@@ -50,6 +52,10 @@ export class HomePage implements OnInit {
 
   obterUsuarioPorEmail(email: string | undefined): string {
     return email ? email.split('@')[0] : 'Usuário Desconhecido';
+  }
+
+  toggleTheme() {
+    return this.themeService.toggleTheme();
   }
 
   signOut() {
