@@ -21,7 +21,10 @@ export class SupabaseService {
       }
     });
     this.supabaseclient.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT') {
+      if(event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        this.user.next(session!.user);
+        this.router.navigate(['/home']);
+      } else {
         this.user.next(null);
       }
     });
@@ -57,9 +60,7 @@ export class SupabaseService {
   async signInWithSocialAccount(provider: Provider) {
     await this.supabaseclient.auth.signInWithOAuth({
       provider: provider
-    })
-
-    this.router.navigate(['home']);
+    });
   }
 
   async signOut() {
