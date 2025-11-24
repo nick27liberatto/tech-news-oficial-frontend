@@ -1,24 +1,26 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { SupabaseService } from '../../services/supabase.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TotpService } from '../../services/totp.service';
+import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-verify-totp-page',
-  imports: [RouterLink, ɵInternalFormsSharedModule, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './verify-totp-page.html',
   styleUrl: './verify-totp-page.scss'
 })
 
-export class VerifyTotpPage {
+export class VerifyTotpPage  implements OnInit {
   private router = inject(Router);
+  private supabaseService = inject(SupabaseService);
   private totpService = inject(TotpService);
   private snackBar = inject(MatSnackBar)
+  backUrl:string = '';
 
   form: FormGroup = new FormGroup({
-    code: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{6}$/)])
+    code: new FormControl('')
   })
 
   factorId = localStorage.getItem('mfa_factor_id');
@@ -28,13 +30,28 @@ export class VerifyTotpPage {
     return this.form.get('code') as FormControl;
   }
 
+  ngOnInit(): void {
+    this.getBackButtonUrl();
+  }
+
+  async getBackButtonUrl() {
+    const user = await this.supabaseService.loggedUser();
+    if (!user) {
+      this.backUrl = '/login';
+      return;
+    }
+
+    this.backUrl = '/home';
+    return;
+  }
+
   async verify() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    if (!this.factorId || !this.challengeId) {
+    if (!this.factorId) {
       this.snackBar.open('Erro: informações de MFA ausentes.', undefined, {
         duration: 3000,
         verticalPosition: 'top',
@@ -48,7 +65,7 @@ export class VerifyTotpPage {
 
     const { data, error } = await this.totpService.verifyTotpEnrollment(
       this.factorId,
-      this.challengeId,
+      this.challengeId!,
       code
     );
 

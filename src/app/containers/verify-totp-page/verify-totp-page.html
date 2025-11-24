@@ -4,6 +4,6 @@
     <form [formGroup]="form">
       <input type="text" formControlName="code" maxlength="6" placeholder="000000">
       <button class="option yellow" (click)="verify()"> Enviar </button>
-      <button class="option" routerLink="/login"> Voltar </button>
+      <button class="option" [routerLink]="backUrl"> Voltar </button>
     </form>
   </div>

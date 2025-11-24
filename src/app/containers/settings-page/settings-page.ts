@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TotpService } from '../../services/totp.service';
 
@@ -12,9 +12,11 @@ import { TotpService } from '../../services/totp.service';
 })
 export class SettingsPage implements OnInit {
   private totpService = inject(TotpService);
-  private snackBar = inject(MatSnackBar);
+  private snackBarService = inject(MatSnackBar);
   mfaEnabled = false;
   factorId: string | null = null;
+  challengeId:string | null = null;
+  totpUri:string | null = null;
 
   async ngOnInit() {
     await this.checkMfaStatus();
@@ -23,8 +25,8 @@ export class SettingsPage implements OnInit {
   async checkMfaStatus() {
     const { data, error } = await this.totpService.getMfaFactors();
 
-    if (data) {
-      const totp = data.all.find((f: any) => f.factor_type === 'totp' && f.status === 'verified');
+    if (data && data.all.length > 0) {
+      const totp = data.all.find((f: any) => f.factor_type === 'totp');
       if (totp) {
         this.mfaEnabled = true;
         this.factorId = totp.id;
@@ -40,41 +42,50 @@ export class SettingsPage implements OnInit {
     }
   }
 
-async enableMfa() {
-  const { data, error } = await this.totpService.enrollTotp();
+  async enableMfa() {
+  const result = await this.totpService.setupTotp();
 
-  if (error) {
-    this.snackBar.open(error.message, undefined, { duration: 3000 });
-    return;
-  }
+  this.factorId = result.factorId;
+  this.challengeId = result.challengeId;
+  this.totpUri = result.totpUri;
 
-  const qrUri = data.totp?.uri;
-
-  localStorage.setItem('mfa_factor_id', data.id);
-  localStorage.setItem('mfa_challenge_id', '');
-
-  window.location.href = '/setup-mfa?uri=' + encodeURIComponent(qrUri);
+  window.location.href = '/setup-mfa?uri=' + encodeURIComponent(this.totpUri);
 }
 
   async disableMfa() {
     if (!this.factorId) {
-      this.snackBar.open('Nenhum fator TOTP encontrado.', undefined, { duration: 3000 });
+      this.snackBarService.open('Nenhum fator TOTP encontrado.', undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'end',
+        panelClass: 'custom-error-snackbar'
+      });
       return;
     }
 
     const { error } = await this.totpService.unenrollTotp(this.factorId);
 
     if (error) {
-      this.snackBar.open(error.message, undefined, { duration: 3000 });
+      this.snackBarService.open(error.message, undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'end',
+        panelClass: 'custom-error-snackbar'
+      });
       return;
     }
 
-    this.snackBar.open('MFA desativado com sucesso!', undefined, { duration: 3000 });
+    this.snackBarService.open('MFA desativado com sucesso!', undefined, {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+      panelClass: 'custom-sucess-snackbar'
+    });
     this.mfaEnabled = false;
   }
 
   onSubmit() {
-    this.snackBar.open('Configurações salvas!', undefined, { duration: 2000 });
+    this.snackBarService.open('Configurações salvas!', undefined, { duration: 2000 });
   }
 
 }

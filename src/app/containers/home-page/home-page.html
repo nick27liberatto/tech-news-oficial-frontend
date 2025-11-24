@@ -16,7 +16,7 @@
       <img matButton [matMenuTriggerFor]="menu" class="user-avatar header-item"
          [src]="user?.user_metadata['picture'] || 'assets/images/avatar/default-avatar.png'" alt="Avatar">
       <mat-menu #menu="matMenu">
-         <!-- <button mat-menu-item routerLink="/settings">Configurações</button> -->
+         <button mat-menu-item routerLink="/settings">Configurações</button>
          <button mat-menu-item (click)="signOut()">Sair</button>
       </mat-menu>
    </div>
@@ -44,16 +44,16 @@
                </p>
             </div>
             <!-- <div class="newsletter-actions">
-         <button class="action">
-            <mat-icon>favorite</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>comment</mat-icon>
-         </button>
-         <button class="action">
-            <mat-icon>share</mat-icon>
-         </button>
-      </div> -->
+               <button class="action" [ngClass]="{'liked': userHasLiked}" (click)="toggleLike(item)">
+                  <mat-icon>favorite</mat-icon>
+               </button>
+               <button class="action" (click)="openComments(item)">
+                  <mat-icon>comment</mat-icon>
+               </button>
+               <button class="action" (click)="share(item)">
+                  <mat-icon>share</mat-icon>
+               </button>
+            </div> -->
          </div>
          }
       </mat-tab>

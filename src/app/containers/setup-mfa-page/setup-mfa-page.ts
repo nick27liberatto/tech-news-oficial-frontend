@@ -9,7 +9,6 @@ import { QrCodeComponent } from 'ng-qrcode';
   styleUrl: './setup-mfa-page.scss'
 })
 export class SetupMfaPage {
-
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -27,9 +26,5 @@ export class SetupMfaPage {
 
   encodeURI(qrUri:string) {
     return encodeURIComponent(qrUri);
-  }
-
-  goToVerify() {
-    this.router.navigate(['/verify-mfa']);
   }
 }

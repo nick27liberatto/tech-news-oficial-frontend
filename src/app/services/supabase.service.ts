@@ -21,10 +21,7 @@ export class SupabaseService {
       }
     });
     this.supabaseclient.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        this.user.next(session!.user);
-        this.router.navigate(['/home']);
-      } else {
+      if (event === 'SIGNED_OUT') {
         this.user.next(null);
       }
     });

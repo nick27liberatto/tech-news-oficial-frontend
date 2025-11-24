@@ -16,7 +16,7 @@ import { ThemeService } from '../../services/theme-service';
 import { debounceTime, Observable } from 'rxjs';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '@supabase/auth-js';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Post, WebzApiResponse } from '../../models/news-api.model';
 
 @Component({
@@ -37,10 +37,13 @@ export class HomePage implements OnInit {
   private themeService = inject(ThemeService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
-  user:any;
+
+  userHasLiked: boolean = false;
+
+  user: any;
   news: NewsletterWithProfile[] = [];
-  response$:Observable<WebzApiResponse> = new Observable<WebzApiResponse>;
-  externalNews:Post[] = [];
+  response$: Observable<WebzApiResponse> = new Observable<WebzApiResponse>;
+  externalNews: Post[] = [];
   form: FormGroup = new FormGroup({
     search: new FormControl('')
   });
@@ -62,6 +65,19 @@ export class HomePage implements OnInit {
     });
 
     this.user = await this.supabaseService.loggedUser() as User;
+  }
+
+  //TO DO
+  toggleLike(news: NewsletterWithProfile) {
+    console.log('curtiu');
+  }
+
+  openComments(news: NewsletterWithProfile) {
+    console.log('curtiu');
+  }
+
+  share(news: NewsletterWithProfile) {
+    console.log('curtiu');
   }
 
   async loadExternalNewsletters() {
@@ -95,7 +111,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  onSource(url:string) {
+  onSource(url: string) {
     window.location.href = url;
   }
 
