@@ -103,7 +103,7 @@ export class LoginFormPage implements OnInit {
     });
 
     if (this.isMagicLink) {
-      this.router.navigate(['confirm-email']);
+      this.router.navigate(['/confirm-email']);
       return;
     }
 
