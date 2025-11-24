@@ -113,12 +113,10 @@ export class LoginFormPage implements OnInit {
 
   onGoogleLogin() {
     this.supabaseService.signInWithSocialAccount('google');
-    this.router.navigate(['/home']);
   }
 
   onGithubLogin() {
     this.supabaseService.signInWithSocialAccount('github');
-    this.router.navigate(['/home']);
   }
 
   onResetForm() {

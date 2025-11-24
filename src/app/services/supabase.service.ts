@@ -58,6 +58,8 @@ export class SupabaseService {
     await this.supabaseclient.auth.signInWithOAuth({
       provider: provider
     })
+
+    this.router.navigate(['home']);
   }
 
   async signOut() {
