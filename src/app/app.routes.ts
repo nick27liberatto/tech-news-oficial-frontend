@@ -14,8 +14,7 @@ import { SetupMfaPage } from './containers/setup-mfa-page/setup-mfa-page';
 export const routes: Routes = [
   {
     path: 'home',
-    component: HomePage,
-    canActivate: [authenticatedGuard]
+    component: HomePage
   },
   {
     path: 'settings',
